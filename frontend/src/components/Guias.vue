@@ -478,7 +478,7 @@ let linkEvaluacion = ref("");
 let linkMaterial = ref("");
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Guias ${useFase.fase}`;
+  document.title = `COLMABE || Guias ${useFase.fase}`;
 };
 
 function cambio(msg) {

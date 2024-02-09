@@ -359,7 +359,7 @@ let errores = ref("");
 let newEvaluacion = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Instrumentos Evaluacion`;
+  document.title = `COLMABE || Instrumentos Evaluacion`;
 };
 
 function cambio(msg) {

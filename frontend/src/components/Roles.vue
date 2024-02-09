@@ -277,7 +277,7 @@ let newRoles = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Roles de Usuario"; 
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
 };
 
 async function traerRoles() {

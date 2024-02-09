@@ -287,7 +287,7 @@ let errores = ref("");
 let newMatriales = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Materiales ${usePrograma.idPrograma.nombre}`;
+  document.title = `COLMABE || Materiales ${usePrograma.idPrograma.nombre}`;
 };
 
 async function materialesPrograma() {

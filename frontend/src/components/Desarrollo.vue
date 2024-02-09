@@ -611,7 +611,7 @@ let linkProyecto = ref(false);
 let linkPlaneacion = ref(false);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Desarrollo Curricular`;
+  document.title = `COLMABE || Desarrollo Curricular`;
 };
 
 function faseAnalisis() {

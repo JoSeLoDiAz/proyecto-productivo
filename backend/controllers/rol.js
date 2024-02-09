@@ -17,7 +17,7 @@ export const postRol = async (req, res) => {
 
 export const getRol = async (req, res) => {
   try {
-    const buscar = await Rol.find();
+    const buscar = await role.find();
     res.json({ buscar });
   } catch (error) {
     res.status(500).json({ msg: "No se puede buscar los Rols" });
@@ -27,8 +27,8 @@ export const getRol = async (req, res) => {
 export const getRolCodigo = async (req, res) => {
   try {
     const { codigo } = req.params;
-    const rol = await Rol.find();
-    const resultados = rol.filter((objeto) =>
+    const role = await role.find();
+    const resultados = role.filter((objeto) =>
       objeto.codigo.toString().startsWith(codigo)
     );
     console.log(resultados);
@@ -45,7 +45,7 @@ export const getRolCodigo = async (req, res) => {
 export const getRolId = async (req, res) => {
   try {
     const { id } = req.params;
-    const rol = await Rol.findById({ _id: id });
+    const role = await role.findById({ _id: id });
     if (rol) {
       res.json(rol);
     } else {
@@ -87,11 +87,11 @@ export const patchRol = async (req, res) => {
   const id = req.params.id;
   const { estado } = req.body;
   try {
-    const rol = await Rol.findById(id);
-    if (rol) {
-      rol.estado = estado;
-      await rol.save();
-      res.json(rol);
+    const role = await role.findById(id);
+    if (role) {
+      role.estado = estado;
+      await role.save();
+      res.json(role);
     } else {
       console.log(`id: ${id} no encontrado`);
       res.status(404).json({ msg: `rol con id: ${id} no encontrado` });
@@ -104,7 +104,7 @@ export const patchRol = async (req, res) => {
 
 export const deleteRol = async (req, res) => {
   const { id } = req.params;
-  const RolEliminado = await Rol.findOneAndDelete({ _id: id });
+  const RolEliminado = await role.findOneAndDelete({ _id: id });
 
   if (RolEliminado) {
     return res.json({

@@ -1,7 +1,7 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
-import {isAdmin} from "../helpers/validar-usuario.js"
+import { isAdmin } from "../helpers/validate-user.js";
 
 const router= Router()
 
@@ -21,7 +21,7 @@ router.post("/",[
     check("region","Complete el campo Region").trim().not().isEmpty().toLowerCase(),
     check("departamento","Complete el campo Departamento").trim().not().isEmpty().toLowerCase(),
     check("danedepartamento","Complete el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
-    validarCampos
+    validateFields
 ],postCiudad)
 
 router.get('/', getCiudad);
@@ -34,7 +34,7 @@ router.put('/:id',[
     check("region","Complete el campo Region").trim().not().isEmpty().toLowerCase(),
     check("departamento","Complete el campo Departamento").trim().not().isEmpty().toLowerCase(),
     check("danedepartamento","Complete el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
-    validarCampos
+    validateFields
 ], putCiudad);
 
 router.patch('/:id',patchCiudad)

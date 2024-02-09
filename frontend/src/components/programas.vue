@@ -563,7 +563,7 @@ let linkInstructores = ref("");
 let newProgramas = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Programas`;
+  document.title = `COLMABE || Programas`;
 };
 
 function cambio(msg) {

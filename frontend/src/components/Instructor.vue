@@ -139,7 +139,7 @@
                     <th>Instructor</th>
                     <th>Estado</th>
                     <th>Email</th>
-                    <th>Telefono</th>
+                    <th>celular</th>
                   </tr>
                 </thead>
                 <tbody v-for="u in usuarios" :key="u">
@@ -167,7 +167,7 @@
                       <span v-else style="color: red">Inactivo</span>
                     </td>
                     <td>{{ u.email }}</td>
-                    <td>{{ u.telefono }}</td>
+                    <td>{{ u.celular }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -315,8 +315,8 @@
               <strong>Correo</strong>
               <span>{{ dato_perfil.email }}</span>
 
-              <strong>Telefono</strong>
-              <span>{{ dato_perfil.telefono }}</span>
+              <strong>celular</strong>
+              <span>{{ dato_perfil.celular }}</span>
 
               <strong>Estado civil</strong>
               <span>{{ dato_perfil.estado_civil }}</span>
@@ -357,7 +357,7 @@ let errores = ref("");
 let newIntructores = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Instructores ${usePrograma.idPrograma.nombre}`;
+  document.title = `COLMABE || Instructores ${usePrograma.idPrograma.nombre}`;
 };
 
 async function instructoresPrograma() {

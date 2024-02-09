@@ -3,7 +3,7 @@ import Evaluacion from "../models/evaluacion.js";
 import Material from "../models/material.js";
 import dotenv from "dotenv";
 import path from "path";
-import subirArchivo from "../helpers/subir-archivo.js";
+import uploadFile  from "../helpers/subir-archivo.js";
 import url from "url";
 import * as fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
@@ -13,7 +13,7 @@ export const Archivo = async (req, res) => {
   const { id } = req.params;
   try {
     let archivo;
-    await subirArchivo(req.files, undefined)
+    await uploadFile (req.files, undefined)
       .then((value) => (archivo = value))
       .catch((err) => console.log("Error : ", err));
     let guia = await Guia.findById(id);

@@ -20,10 +20,10 @@ export const postPrograma = async (req, res) => {
       version,
       estado,
       nivel,
-      red,
+      knowledge_network,
     } = req.body;
 
-    const buscar = await Programa.findOne({ codigo: codigo, red: red });
+    const buscar = await Programa.findOne({ codigo: codigo, knowledge_network: knowledge_network });
 
     if (buscar) {
       return res.status(404).json({
@@ -52,7 +52,7 @@ export const postPrograma = async (req, res) => {
         version: version,
         estado: estado,
         nivel: nivel,
-        red: red,
+        knowledge_network: knowledge_network,
       });
       await nuevoPrograma.save();
       res.setHeader('Content-Disposition', `attachment; filename="${result.url}"`);
@@ -249,7 +249,7 @@ export const getPrograma = async (req, res) => {
   try {
     const buscar = await Programa.find()
       .populate("nivel")
-      .populate("red")
+      .populate("knowledge_network")
       .populate("desarrollo")
       .populate("usuario")
       .populate("ambiente")
@@ -275,7 +275,7 @@ export const getProgramas = async (req, res) => {
 
     const buscar = await Programa.find({ _id: { $in: idArray } })
       .populate("nivel")
-      .populate("red")
+      .populate("knowledge_network")
       .populate("desarrollo")
       .populate("usuario")
       .populate("ambiente")
@@ -293,7 +293,7 @@ export const getProgramaCodigo = async (req, res) => {
     const { codigo } = req.params;
     const programa = await Programa.find()
       .populate("nivel")
-      .populate("red")
+      .populate("knowledge_network")
       .populate("desarrollo")
       .populate("usuario")
       .populate("ambiente")
@@ -316,7 +316,7 @@ export const getProgramaId = async (req, res) => {
     const { id } = req.params;
     const programa = await Programa.findById({ _id: id })
       .populate("nivel")
-      .populate("red")
+      .populate("knowledge_network")
       .populate("desarrollo")
       .populate("usuario")
       .populate("ambiente")
@@ -350,7 +350,7 @@ export const putPrograma = async (req, res) => {
       version,
       estado,
       nivel,
-      red,
+      knowledge_network,
       desarrollo,
       usuario,
       ambiente,
@@ -372,7 +372,7 @@ export const putPrograma = async (req, res) => {
       version: version,
       estado: estado,
       nivel: nivel,
-      red: red,
+      knowledge_network: knowledge_network,
     };
 
     if (req.files && req.files.disenoCurricular) {

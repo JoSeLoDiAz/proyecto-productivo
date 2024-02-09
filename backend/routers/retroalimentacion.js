@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -18,13 +18,13 @@ deleteRetroalimentacion
 
 router.post('/archivo/:id',[
     check("id", "ID invalido").isMongoId(),
-    validarCampos
+    validateFields
 ],Archivo)
 
 router.post('/archivo/:id',[
     check("id", "ID invalido").isMongoId(),
     Archivo,
-    validarCampos
+    validateFields
 ])
 
 router.post("/",[
@@ -34,12 +34,12 @@ router.post("/",[
     check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
     check("fecha","Complete el campo Fecha").trim().not().isEmpty().toLowerCase(),
     check("programa","Programa Invalido").trim().isMongoId(),
-    validarCampos
+    validateFields
 ],postRetroalimentacion)
 
 router.get("/mostrar/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivo)
 
 router.get('/', getRetroalimentacion);
@@ -53,7 +53,7 @@ router.put('/:id',[
     check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
     check("fecha","Complete el campo Fecha").trim().not().isEmpty().toLowerCase(),
     check("programa","Programa Invalido").trim().isMongoId(),
-    validarCampos
+    validateFields
 ], putRetroalimentacion);
 
 router.patch('/:id',patchRetroalimentacion)

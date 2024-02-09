@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -23,7 +23,7 @@ deleteDesarrollo
 } from '../controllers/desarrollo.js';
 
 router.post("/",[
-    validarCampos
+    validateFields
 ],postDesarrollo)
 
 router.post("/matriz/:id",postDesarrolloMatriz)
@@ -35,22 +35,22 @@ router.post("/planeacion/:id",postDesarrolloPlaneacion);
 router.post("/agregar/guia/:id",[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("fase","Complete el campo Fase").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postDesarrolloGuia);
 
 router.get("/archivo/matriz/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivoMatriz);
 
 router.get("/archivo/proyecto/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivoProyecto);
 
 router.get("/archivo/planeacion/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivoPlaneacion);
 
 router.get('/', getDesarrollo);
@@ -62,7 +62,7 @@ router.get('/id/:id',getDesarrolloId);
 router.put('/:id',[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("fase","Complete el campo Fase").trim().not().isEmpty().toLowerCase(),
-     validarCampos
+     validateFields
 ], putDesarrollo);
 
 router.patch('/:id',patchDesarrollo)

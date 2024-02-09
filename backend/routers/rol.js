@@ -1,7 +1,7 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
-import {isAdmin} from "../helpers/validar-usuario.js"
+import { isAdmin } from "../helpers/validate-user.js";
 
 const router= Router()
 
@@ -18,7 +18,7 @@ deleteRol
 
 router.post("/",[
     check("denominacion","Complete el campo Denominación").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postRol)
 
 router.get('/', getRol);
@@ -29,7 +29,7 @@ router.get('/id/:id',getRolId);
 
 router.put('/:id',[
     check("denominacion","Complete el campo Denominación").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putRol);
 
 router.patch('/:id',patchRol)

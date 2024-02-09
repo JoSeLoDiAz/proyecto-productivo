@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -18,7 +18,7 @@ router.post("/",[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("tipo","Complete el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
     check("descripcion","Complete el campo Descripcion").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postMaterialFormacion)
 
 router.get('/', getMaterialFormacion);
@@ -29,7 +29,7 @@ router.put('/:id',[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("tipo","Complete el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
     check("descripcion","Complete el campo Descripcion").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putMaterialFormacion);
 
 router.patch('/:id',patchMaterialFormacion)

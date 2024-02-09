@@ -343,7 +343,7 @@ let documento = ref(null);
 let programa = ref("");
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Investigacion ${usePrograma.idPrograma.nombre}`;
+  document.title = `COLMABE || Investigacion ${usePrograma.idPrograma.nombre}`;
 };
 
 function cambio(msg) {

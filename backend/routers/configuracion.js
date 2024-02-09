@@ -1,7 +1,7 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
-import {isAdmin} from "../helpers/validar-usuario.js"
+import { isAdmin } from "../helpers/validate-user.js";
 
 const router= Router()
 

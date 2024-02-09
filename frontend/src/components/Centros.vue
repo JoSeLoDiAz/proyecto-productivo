@@ -406,7 +406,7 @@ let newCentros = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Centros de Formacion"; // Título predeterminado aquí
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
 };
 
 async function buscocentro() {

@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -19,7 +19,7 @@ deleteProyecto
 router.post('/archivo/:id',[
     check("id", "ID invalido").isMongoId(),
     check("archivo","Archivo vacio").trim().not().isEmpty(),
-    validarCampos
+    validateFields
 ],Archivo)
 
 router.post("/",[
@@ -28,12 +28,12 @@ router.post("/",[
     check("fecha","Complete el campo Fecha").trim().not().isEmpty().toLowerCase(),
     check("version","Complete el campo Versión").trim().not().isEmpty().toLowerCase(),
     check("version","La versión excede los caracteres permitidos").trim().isLength({min:1,max:4}).toLowerCase(),
-    check("programa","Programa Inavlido").trim().isMongoId(),validarCampos
+    check("programa","Programa Inavlido").trim().isMongoId(),validateFields
 ],postProyecto)
 
 router.get("/mostrar/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivo)
 
 router.get('/', getProyecto);
@@ -47,7 +47,7 @@ router.put('/:id',[
     check("version","Complete el campo Versión").trim().not().isEmpty().toLowerCase(),
     check("version","La versión excede los caracteres permitidos").trim().isLength({min:1,max:4}).toLowerCase(),
     check("programa","Programa Inavlido").trim().isMongoId(),
-    validarCampos
+    validateFields
 ], putProyecto);
 
 router.patch('/:id',patchProyecto)

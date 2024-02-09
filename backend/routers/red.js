@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -18,7 +18,7 @@ deleteRed
 
 router.post("/",[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postRed)
 
 router.post("/agregar/programa/:id",[
@@ -28,7 +28,7 @@ router.post("/agregar/programa/:id",[
     check("version","Complete el campo Versión").trim().not().isEmpty().toLowerCase(),
     check("version","La versión excede los caracteres permitidos").trim().isLength({min:1,max:4}).toLowerCase(),
     check("nivel","Nivel invalido").trim().isMongoId(),
-    validarCampos
+    validateFields
 ],postRedPrograma)
 
 router.get('/', getRed);
@@ -39,7 +39,7 @@ router.get('/id/:id',getRedId);
 
 router.put('/:id',[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putRed);
 
 router.patch('/:id',patchRed)

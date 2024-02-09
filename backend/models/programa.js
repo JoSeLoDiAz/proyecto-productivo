@@ -12,7 +12,7 @@ const programaSchema = new mongoose.Schema(
    nivel: {type:mongoose.Schema.Types.ObjectId,ref:'Nivel',require:true},
    red:{type:mongoose.Schema.Types.ObjectId,ref:'Red'},
    desarrollo: {type:mongoose.Schema.Types.ObjectId,ref:'Desarrollo'},
-   usuario:[{type:mongoose.Schema.Types.ObjectId,ref:'Usuario'}],
+   user:[{type:mongoose.Schema.Types.ObjectId,ref:'User'}],
    ambiente: [{type:mongoose.Schema.Types.ObjectId,ref:'Ambiente'}],
    materialformacion: [{type:mongoose.Schema.Types.ObjectId, ref: 'MaterialFormacion'}],
    registroCalificado: {type: Object},

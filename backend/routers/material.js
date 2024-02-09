@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -20,17 +20,17 @@ deleteMaterial
 router.post('/archivo/:id',[
     check("id", "ID invalido").isMongoId(),
     check("archivo","Archivo vacio").trim().not().isEmpty(),
-    validarCampos
+    validateFields
 ],Archivo)
 
 router.post("/",[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postMaterial)
 
 router.get("/mostrar/:id",[
     check('id', 'No es un ID válido').isMongoId(), 
-    validarCampos   
+    validateFields   
 ],mostrarArchivo)
 
 router.get('/', getMaterial);
@@ -41,7 +41,7 @@ router.get('/id/:id',getMaterialId);
 
 router.put('/:id',[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putMaterial);
 
 router.patch('/:id',patchMaterial)

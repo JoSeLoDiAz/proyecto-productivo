@@ -26,7 +26,7 @@ pinia.use(createPersistedState(createPersistedState({
     'ejecucion',
     'evaluacion',
     'idRol',
-    'usuarioId',
+    'userId',
     'idRed',
     'idCentro'
   ],

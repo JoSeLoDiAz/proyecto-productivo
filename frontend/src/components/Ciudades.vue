@@ -317,7 +317,7 @@ let errores = ref("");
 let alert = ref(false);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Ciudades`;
+  document.title = `COLMABE || Ciudades`;
 };
 
 function cambio(msg) {

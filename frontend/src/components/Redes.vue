@@ -286,7 +286,7 @@ let newRedes = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Redes de Conocimiento"; // Título predeterminado aquí
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
   console.log(document.title);
 };
 

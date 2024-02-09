@@ -249,8 +249,8 @@
               </div>
 
               <div class="p-2">
-                <span>Telefono</span>
-                <input type="text" v-model="telefono" />
+                <span>celular</span>
+                <input type="text" v-model="celular" />
               </div>
 
               <div class="p-2">
@@ -481,8 +481,8 @@
                 <small>{{ nombre }} {{ apellidos }}</small>
                 <strong>identificacion:</strong>
                 <small>{{ identificacion }}</small>
-                <strong>Numero De Telefono:</strong>
-                <small>{{ telefono }}</small>
+                <strong>Numero De celular:</strong>
+                <small>{{ celular }}</small>
                 <strong>Direccion:</strong>
                 <small>{{ direccion }}</small>
                 <strong>Fecha de Nacimiento:</strong>
@@ -544,7 +544,7 @@ let genero = ref("");
 let direccion = ref("");
 let email = ref("");
 let password = ref("");
-let telefono = ref("");
+let celular = ref("");
 let ocupacion = ref("");
 let estado_civil = ref("");
 let nacionalidad = ref("");
@@ -567,7 +567,7 @@ let newUsuarios = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Usuarios";
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
 };
 
 function cambio(msg) {
@@ -670,9 +670,9 @@ function validaciones() {
     alert.value = true;
     errores.value = "Complete el campo Dirección";
     alerta();
-  } else if (telefono.value.trim() === "") {
+  } else if (celular.value.trim() === "") {
     alert.value = true;
-    errores.value = "Complete el campo Telefono";
+    errores.value = "Complete el campo celular";
     alerta();
   } else if (email.value.trim() === "") {
     alert.value = true;
@@ -721,7 +721,7 @@ async function registrarUsuario() {
         fecha_nacimiento: fecha_nacimiento.value.toLowerCase(),
         genero: genero.value.toLowerCase(),
         direccion: direccion.value.toLowerCase(),
-        telefono: telefono.value.toLowerCase(),
+        celular: celular.value.toLowerCase(),
         email: email.value.toLowerCase(),
         password: password.value.toLowerCase(),
         ocupacion: ocupacion.value.toLowerCase(),
@@ -766,7 +766,7 @@ function llevardatos(u) {
   fecha_nacimiento.value = u.fecha_nacimiento;
   genero.value = u.genero;
   direccion.value = u.direccion;
-  telefono.value = u.telefono;
+  celular.value = u.celular;
   email.value = u.email;
   password.value = u.password;
   ocupacion.value = u.ocupacion;
@@ -788,7 +788,7 @@ function editar(u) {
   fecha_nacimiento.value = u.fecha_nacimiento;
   genero.value = u.genero;
   direccion.value = u.direccion;
-  telefono.value = u.telefono;
+  celular.value = u.celular;
   (email.value = u.email),
     (password.value = u.password),
     (ocupacion.value = u.ocupacion);
@@ -814,7 +814,7 @@ async function guardarEdision() {
         fecha_nacimiento.value.toLowerCase(),
         genero.value.toLowerCase(),
         direccion.value.toLowerCase(),
-        telefono.value.toLowerCase(),
+        celular.value.toLowerCase(),
         email.value,
         password.value,
         ocupacion.value.toLowerCase(),
@@ -875,7 +875,7 @@ function limpiar() {
   fecha_nacimiento.value = "";
   genero.value = "";
   direccion.value = "";
-  telefono.value = "";
+  celular.value = "";
   email.value = "";
   password.value = "";
   ocupacion.value = "";

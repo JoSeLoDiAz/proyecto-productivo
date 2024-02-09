@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -23,7 +23,7 @@ router.post("/",[
     check("creditos","Complete el campo creditos").trim().not().isEmpty().toLowerCase(),
     check("creditos","Los credistos exceden los caracteres permitidos").trim().isLength({min:2,max:3}).toLowerCase(),
     check("fecha","Complete el campo fecha").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postRegistro)
 
 router.get('/', getRegistro);
@@ -39,7 +39,7 @@ router.put('/:id',[
     check("creditos","Complete el campo creditos").trim().not().isEmpty().toLowerCase(),
     check("creditos","Los credistos exceden los caracteres permitidos").trim().isLength({min:2,max:3}).toLowerCase(),
     check("fecha","Complete el campo fecha").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putRegistro);
 
 router.patch('/:id',patchRegistro)

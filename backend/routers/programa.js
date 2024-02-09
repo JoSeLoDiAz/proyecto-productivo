@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -30,8 +30,8 @@ router.post("/",[
     check("requisitos","Complete el campo Requisitos").trim().not().isEmpty(),
     check("version","Complete el campo Versión").trim().not().isEmpty().isLength({min:1,max:4}),
     check("nivel","Nivel invalido").trim().isMongoId(),
-    check("red","Red invalida").trim().isMongoId(),
-    validarCampos
+    check("knowledge_network","Red de conocimiento invalida").trim().isMongoId(),
+    validateFields
 ],postPrograma)
 
 router.post("/agregar/desarrollo/:id",postProgramaDesarrollo)
@@ -49,7 +49,7 @@ router.post("/registro/calificado/:id",[
     check("creditos","Complete el campo Número de Creditos").trim().not().isEmpty(),
     check("snies", "Complete el campo Codigo SNIES").trim().not().isEmpty(),
     check("snies","El codigo SNIES debe estar entre 6 y 8 caracteres").trim().isLength({min:6,max:8}),
-    validarCampos
+    validateFields
 ],postRegistroCalificado)
 
 router.get('/', getPrograma);
@@ -68,7 +68,7 @@ router.put('/:id',[
     check("requisitos","Complete el campo Requisitos").trim().not().isEmpty(),
     check("version","Complete el campo Versión").trim().not().isEmpty(),
     check("nivel","Nivel invalido").trim().isMongoId(),
-    validarCampos
+    validateFields
 ], putPrograma);
 
 router.put('/diseno/:id',putProgramaDiseno)

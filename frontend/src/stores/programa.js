@@ -178,7 +178,7 @@ export const useProgramaStore = defineStore(
       requisitos,
       version,
       nivel,
-      red
+      knowledge_network
     ) => {
       try {
         cargando.value = true;
@@ -190,7 +190,7 @@ export const useProgramaStore = defineStore(
         formData.append("requisitos", requisitos);
         formData.append("version", version);
         formData.append("nivel", nivel);
-        formData.append("red", red);
+        formData.append("red", knowledge_network);
         const response = await axios.put(
           `${direccion}/programa/${id}`,
           formData,

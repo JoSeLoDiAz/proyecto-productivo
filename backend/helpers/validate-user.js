@@ -10,9 +10,9 @@ export const isAdmin = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const usuario = decoded;
+    const user = decoded;
 
-    if (usuario.rol === "Administrador") {
+    if (user.role === "Administrador") {
       next();
     } else {
       return res.status(403).json({ msg: "Solo el administrador puede realizar esta acción" });
@@ -32,9 +32,9 @@ export const isAdmin = async (req, res, next) => {
       const token = authHeader.split(" ")[1];
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const usuario = decoded;
-        const buscarRol = await Rol.findOne({ _id: usuario.rol });
-        if (usuario && buscarRol.denominacion === "Gestor de red") {
+        const user = decoded;
+        const searchRole = await Rol.findOne({ _id: user.rol });
+        if (user && searchRole.denominacion === "Gestor de red") {
           next();
         } else {
           res.status(403).json({ msg: "Acceso no autorizado" });
@@ -53,9 +53,9 @@ export const isAdmin = async (req, res, next) => {
       const token = authHeader.split(" ")[1];
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const usuario = decoded;
-        const buscarRol = await Rol.findOne({ _id: usuario.rol });
-        if (usuario && buscarRol.denominacion === "Instructor") {
+        const user = decoded;
+        const searchRole = await Rol.findOne({ _id: user.rol });
+        if (user && searchRole.denominacion === "Instructor") {
           next();
         } else {
           res.status(403).json({ msg: "Acceso no autorizado" });

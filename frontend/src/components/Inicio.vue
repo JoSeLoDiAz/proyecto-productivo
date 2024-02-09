@@ -43,7 +43,7 @@
                 />
                 <div class="carousel-caption d-none d-md-block">
                   <h4 style="color: white">
-                    Bienvenido al Repositorio Sena
+                    Bienvenido al Repositorio - COLMABE
                     <b>
                       {{ useUsuario.usuarioId.nombre }}
                       {{ useUsuario.usuarioId.apellidos }}</b
@@ -69,17 +69,17 @@
               <div class="carousel-item" data-bs-interval="2000">
                 <img
                   style="filter: brightness(0.6); height: 400px"
-                  src="https://www.las2orillas.co/wp-content/uploads/2023/10/sena-2.jpg"
+                  src="https://www.las2orillas.co/wp-content/uploads/2023/10/- COLMABE-2.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
                 <div class="carousel-caption d-none d-md-block">
                   <h6 style="color: white; font-size: 18px">
-                    Descubre el Repositorio Sena
+                    Descubre el Repositorio - COLMABE
                   </h6>
                   <p style="color: white">
                     Explora y mantén la documentación esencial de la
-                    <b>formación SENA.</b><br />
+                    <b>formación - COLMABE.</b><br />
                     Aquí encontrarás recursos valiosos para el desarrollo de la
                     Formacion.
                   </p>
@@ -88,17 +88,17 @@
               <div class="carousel-item" data-bs-interval="2000">
                 <img
                   style="filter: brightness(0.6); height: 400px"
-                  src="https://www.sena-virtual.co/wp-content/uploads/2012/02/Estudiar-en-Sena-virtual.png"
+                  src="https://www.COLMABE-virtual.co/wp-content/uploads/2012/02/Estudiar-en-Sena-virtual.png"
                   class="d-block w-100"
                   alt="..."
                 />
                 <div class="carousel-caption d-none d-md-block">
                   <h6 style="color: white; font-size: 18px">
-                    ¡Explora el Entorno Virtual del <b>SENA</b>!
+                    ¡Explora el Entorno Virtual del <b>COLMABE</b>!
                   </h6>
 
                   <p style="color: white">
-                    Sumérgete en el <b>Entorno Virtual del SENA</b> y descubre
+                    Sumérgete en el <b>Entorno Virtual del COLMABE</b> y descubre
                     una experiencia única.<br />Gestiona herramientas, recursos
                     y contenido dados a tu rol <b>{{ token.rol }}</b
                     >.
@@ -139,7 +139,7 @@
           style="margin-top: 70px"
         >
           <span class="titulo d-flex justify-content-center"
-            >Administrador Repositorio Inteligente SENA</span
+            >Administrador del Colegio Manela Beltran COLMABE</span
           >
         </div>
 
@@ -264,7 +264,7 @@ let red1 = ref("");
 let perfil = ref();
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Inicio`;
+  document.title = `COLMABE || Inicio`;
 };
 
 async function decoded() {

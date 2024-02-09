@@ -351,7 +351,7 @@ let newMateriales = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Materiales de Formacion";
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
 };
 
 function cambio(msg) {

@@ -506,7 +506,7 @@ let sinInfo = ref(false);
 let newAmbientes = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Ambientes de Formacion`;
+  document.title = `COLMABE || Ambientes de Formacion`;
 };
 
 async function cambio(msg) {

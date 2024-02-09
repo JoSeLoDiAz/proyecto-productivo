@@ -1,4 +1,4 @@
-import {validarCampos} from "../valichecks/validar-campos.js"
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator"
 import { Router } from "express"
 
@@ -17,7 +17,7 @@ deleteNivel
 router.post("/",[
     check("denominacion","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ],postNivel)
 
 router.get('/', getNivel);
@@ -27,7 +27,7 @@ router.get('/:codigo', getNivelCodigo);
 router.put('/:id',[
     check("denominacion","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
-    validarCampos
+    validateFields
 ], putNivel);
 
 router.patch('/:id',patchNivel)

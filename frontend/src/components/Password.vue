@@ -95,7 +95,7 @@ function alertaok() {
     icon: "success",
     confirmButtonColor: "#16723b",
     title: ok.value,
-    text: "Legado SENA",
+    text: "COLMABE",
     timer: 3000,
   });
 }

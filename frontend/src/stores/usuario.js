@@ -8,20 +8,20 @@ export const useUsuarioStore = defineStore(
   () => {
     let cargando = ref(false);
     const token = ref('');
-    const rol = ref('');
-    const red = ref('');
+    const role = ref('');
+    const knowledge_network = ref('');
     let usuarioId = ref([]);
 
-    const archivo = async (id, archivo) => {
+    const file = async (id, file) => {
       try {
         cargando.value = true;
         const formData = new FormData();
-        formData.append("archivo", archivo);
+        formData.append("archivo", file);
         let response = await axios.post(
-          `${direccion}/usuario/archivo/${id}`,
+          `${direccion}/usuario/file/${id}`,
           formData,
           {
-            archivo: archivo,
+            file: file,
           }
         );
         return response;
@@ -48,11 +48,11 @@ export const useUsuarioStore = defineStore(
       }
     };
 
-    const archivoNube = async (id, archivo) => {
+    const archivoNube = async (id, file) => {
       try {
         cargando.value = true;
         const formData = new FormData();
-        formData.append("archivo", archivo);
+        formData.append("archivo", file);
         let response = await axios.post(
           `${direccion}/usuario/archivoNube/${id}`,
           formData,
@@ -97,17 +97,17 @@ export const useUsuarioStore = defineStore(
       }
     };
 
-    const inicio = async (identificacion, password) => {
+    const inicio = async (identification_number, password) => {
       try {
         cargando.value = true;
         let datos = await axios.post(`${direccion}/usuario/token`, {
-          identificacion: identificacion,
+          identification_number: identification_number,
           password: password,
         });
         token.value = datos.data.token;
-        rol.value = datos.data.buscar.rol.denominacion;
-        if (datos.data.buscar.red) {
-          red.value = datos.data.buscar.red;
+        role.value = datos.data.buscar.role.denominacion;
+        if (datos.data.buscar.knowledge_network) {
+          knowledge_network.value = datos.data.buscar.knowledge_network;
         }
         return datos;
       } catch (error) {
@@ -125,7 +125,7 @@ export const useUsuarioStore = defineStore(
         for (const key in info) {
           formData.append(key, info[key]);
         }
-        formData.append("hoja_vida", hoja_vida);
+        formData.append("hoja_vida", curriculum_vitae);
         const datos = await axios.post(`${direccion}/usuario`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -140,11 +140,11 @@ export const useUsuarioStore = defineStore(
       }
     };
 
-    const registrarUsuarioRed = async (id, red) => {
+    const registrarUsuarioRed = async (id, knowledge_network) => {
       try {
         cargando.value = true;
         let datos = await axios.post(`${direccion}/usuario/agregarRed/${id}`, {
-          red: red,
+          knowledge_network: knowledge_network,
         });
         return datos;
       } catch (error) {
@@ -158,9 +158,9 @@ export const useUsuarioStore = defineStore(
     const buscarUsuario = async () => {
       try {
         cargando.value = true;
-        const usuario = await axios.get(`${direccion}/usuario`);
-        usuario.data.buscar.reverse();
-        return usuario.data.buscar;
+        const user = await axios.get(`${direccion}/usuario`);
+        user.data.buscar.reverse();
+        return user.data.buscar;
       } catch (error) {
         cargando.value = true;
         console.log("error");
@@ -190,44 +190,44 @@ export const useUsuarioStore = defineStore(
 
     const editarUsuario = async (
       id,
-      nombre,
-      apellidos,
-      identificacion,
-      fecha_nacimiento,
-      genero,
+      name,
+      last_name,
+      identification_number,
+      date_of_birth,
+      gender,
       lugar,
-      telefono,
+      phone,
       email,
       password,
-      ocupacion,
-      estado_civil,
-      nacionalidad,
-      contacto_emergencia,
-      hoja_vida,
-      archivo,
-      rol,
-      red
+      occupation,
+      marital_status,
+      nationality,
+      emergency_contact,
+      curriculum_vitae,
+      file,
+      role,
+      knowledge_network
     ) => {
       try {
         cargando.value = true;
         const formData = new FormData();
         formData.append("nombre", nombre);
-        formData.append("apellidos", apellidos);
-        formData.append("identificacion", identificacion);
-        formData.append("fecha_nacimiento", fecha_nacimiento);
-        formData.append("genero", genero);
+        formData.append("apellidos", last_name);
+        formData.append("identificacion", identification_number);
+        formData.append("fecha_nacimiento", date_of_birth);
+        formData.append("genero", gender);
         formData.append("direccion", lugar);
-        formData.append("telefono", telefono);
+        formData.append("celular", phone);
         formData.append("email", email);
         formData.append("password", password);
-        formData.append("ocupacion", ocupacion);
-        formData.append("estado_civil", estado_civil);
-        formData.append("nacionalidad", nacionalidad);
-        formData.append("contacto_emergencia", contacto_emergencia);
-        formData.append("hoja_vida", hoja_vida);
-        formData.append("archivo", archivo);
-        formData.append("rol", rol);
-        formData.append("red", red);
+        formData.append("ocupacion", occupation);
+        formData.append("estado_civil", marital_status);
+        formData.append("nacionalidad", nationality);
+        formData.append("contacto_emergencia", emergency_contact);
+        formData.append("hoja_vida", curriculum_vitae);
+        formData.append("archivo", file);
+        formData.append("rol", role);
+        formData.append("red", knowledge_network);
         const response = await axios.put(
           `${direccion}/usuario/${id}`,
           formData,
@@ -288,10 +288,10 @@ export const useUsuarioStore = defineStore(
       }
     };
 
-    const cambiarEstado = async (id, estado) => {
+    const cambiarEstado = async (id, status) => {
       try {
         const res = await axios.patch(`${direccion}/usuario/${id}`, {
-          estado: estado,
+          status: status,
         });
         return res;
       } catch (error) {
@@ -300,15 +300,15 @@ export const useUsuarioStore = defineStore(
     };
 
     return {
-      archivo,
+      file,
       archivoNube,
       mostrarArchivo,
       hoja_vidaPerfil,
       mostrarArchivoCloud,
       inicio,
       token,
-      rol,
-      red,
+      role,
+      knowledge_network,
       registrarUsuario,
       registrarUsuarioRed,
       buscarUsuario,

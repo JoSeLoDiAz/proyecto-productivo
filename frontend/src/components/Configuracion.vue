@@ -10,7 +10,7 @@
       "
     >
       <p :style="{ color: coloroficialletra }" class="titulo">
-        Configuracion de personalización SENA
+        Configuracion de personalización - COLMABE
       </p>
       <img class="herramienta" src="../assets/herramienta.png" alt="" />
     </div>
@@ -151,7 +151,7 @@ let pageTitle = ref("");
 
 const setDocumentTitle = () => {
   pageTitle.value = "Configuracion General"; // Título predeterminado aquí
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
   console.log(document.title);
 };
 

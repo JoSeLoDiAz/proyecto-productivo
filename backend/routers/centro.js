@@ -1,7 +1,7 @@
-import {validarCampos} from "../valichecks/validar-campos.js";
+import { validateFields } from "../valichecks/validate-fields.js";
 import {check} from "express-validator";
 import { Router } from "express";
-import {isAdmin} from "../helpers/validar-usuario.js";
+import { isAdmin } from "../helpers/validate-user.js";
 
 const router= Router()
 
@@ -21,7 +21,7 @@ router.post("/",[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("direccion","Complete el campo dirección").trim().not().isEmpty().toLowerCase(),
     check("ciudad","Ciudad Invalida").trim().isMongoId(),
-    validarCampos
+    validateFields
 ],postCentro)
 
 router.get('/', getCentro);
@@ -36,7 +36,7 @@ router.put('/:id',[
     check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
     check("direccion","Complete el campo Dirección").trim().not().isEmpty().toLowerCase(),
     check("ciudad","Ciudad Invalida").trim().isMongoId(),
-     validarCampos
+     validateFields
 ], putCentro);
 
 router.patch('/:id',patchCentro)

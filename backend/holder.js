@@ -1,7 +1,7 @@
 import Holder from "../models/holder.js"
 import bcryptjs from "bcryptjs"
 import { generarJWT } from "../middlewares/validar-jwt.js";
-import subirArchivo from "../helpers/subir-archivo.js";
+import uploadFile  from "../helpers/subir-archivo.js";
 import * as fs from 'fs'
 import path from 'path'
 import url from 'url'
@@ -31,9 +31,9 @@ const holdersHttp = {
     },
 
     holderGetByRol: async (req, res) => {
-        const { rol } = req.params;
+        const { role } = req.params;
 
-        const holder = await Holder.find({rol});
+        const holder = await Holder.find({rolee});
 
         res.json({
             holder
@@ -53,8 +53,8 @@ const holdersHttp = {
     },
          
     holderPost: async (req, res) => {
-        const { name, email, password, document, rol, ficha, phone } = req.body;
-        const holder = new Holder({ name, email, password, document, rol, ficha, phone});
+        const { name, email, password, document, role, ficha, phone } = req.body;
+        const holder = new Holder({ name, email, password, document, role, ficha, phone});
 
         const salt = bcryptjs.genSaltSync();
         holder.password = bcryptjs.hashSync(password, salt)
@@ -70,9 +70,9 @@ const holdersHttp = {
         const { email, password } = req.body;
         const name = "Super"
         const document = "Super"
-        const rol = "SUPER"
+        const role = "SUPER"
         const phone = "000000000"
-        const holder = new Holder({ name, email, password, document, rol, ficha, phone });
+        const holder = new Holder({ name, email, password, document, role, ficha, phone });
 
         const salt = bcryptjs.genSaltSync();
         holder.password = bcryptjs.hashSync(password, salt)
@@ -92,7 +92,7 @@ const holdersHttp = {
 
         resto=tools.actualizarResto(resto.document,resto)
         resto=tools.actualizarResto(resto.name, resto)
-        resto=tools.actualizarResto(resto.rol,resto)
+        resto=tools.actualizarResto(resto.role,resto)
         resto=tools.actualizarResto(resto.ficha,resto)
         resto=tools.actualizarResto(resto.phone,resto)
 
@@ -152,7 +152,7 @@ const holdersHttp = {
                 })
             }
 
-            if (holder.estado === 0) {
+            if (holder.status === 0) {
                 return res.status(400).json({
                     msg: "Holder Inactivo"
                 })
@@ -182,7 +182,7 @@ const holdersHttp = {
         const { id } = req.params;
         try {
             let nombre
-            await subirArchivo(req.files, undefined)
+            await uploadFile (req.files, undefined)
                 .then(value => nombre = value)
                 .catch((err) => console.log(err));
 

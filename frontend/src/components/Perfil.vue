@@ -228,8 +228,8 @@
           <p class="titulos">Direccion:</p>
           <p class="respuestas">{{ perfil.direccion }}</p>
 
-          <p class="titulos">Telefono:</p>
-          <p class="respuestas">{{ perfil.telefono }}</p>
+          <p class="titulos">celular:</p>
+          <p class="respuestas">{{ perfil.celular }}</p>
 
           <p class="titulos">Email:</p>
           <p class="respuestas" style="text-transform: lowercase;">{{ perfil.email }}</p>
@@ -324,8 +324,8 @@
               </div>
 
               <div class="p-2">
-                <span>Telefono</span>
-                <input type="text" v-model="telefono" />
+                <span>celular</span>
+                <input type="text" v-model="celular" />
               </div>
 
               <div class="p-2">
@@ -474,7 +474,7 @@ let identificacion = ref("");
 let fecha_nacimiento = ref("");
 let genero = ref("");
 let direccion = ref("");
-let telefono = ref("");
+let celular = ref("");
 let email = ref("");
 let password = ref("");
 let ocupacion = ref("");
@@ -491,7 +491,7 @@ let pageTitle = ref("");
 
 const setDocumentTitle = () => {
   pageTitle.value = "Tu Perfil"; // Título predeterminado aquí
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
   console.log(document.title);
 };
 
@@ -584,7 +584,7 @@ function editar() {
   fecha_nacimiento.value = perfil.value.fecha_nacimiento;
   genero.value = perfil.value.genero;
   direccion.value = perfil.value.direccion;
-  telefono.value = perfil.value.telefono;
+  celular.value = perfil.value.celular;
   email.value = perfil.value.email;
   password.value = perfil.value.password;
   ocupacion.value = perfil.value.ocupacion;
@@ -609,7 +609,7 @@ async function guardarEdision() {
       fecha_nacimiento.value.toLowerCase(),
       genero.value.toLowerCase(),
       direccion.value.toLowerCase(),
-      telefono.value,
+      celular.value,
       email.value.toLowerCase(),
       password.value,
       ocupacion.value.toLowerCase(),
@@ -656,7 +656,7 @@ function limpiar() {
   fecha_nacimiento.value = "";
   genero.value = "";
   direccion.value = "";
-  telefono.value = "";
+  celular.value = "";
   usuario.value = "";
   ocupacion.value = "";
   estado_civil.value = "";

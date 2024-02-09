@@ -374,7 +374,7 @@ let alert = ref(false);
 let newMateriales = ref([]);
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Material Apoyo`;
+  document.title = `COLMABE || Material Apoyo`;
 };
 
 function cambio(msg) {

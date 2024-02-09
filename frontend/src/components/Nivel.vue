@@ -313,7 +313,7 @@ let newNivel = ref([]);
 
 const setDocumentTitle = () => {
   pageTitle.value = "Niveles de Formacion"; // Título predeterminado aquí
-  document.title = `Legado Sena || ${pageTitle.value}`;
+  document.title = `COLMABE || ${pageTitle.value}`;
   console.log(document.title);
 };
 

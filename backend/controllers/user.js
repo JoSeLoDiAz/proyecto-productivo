@@ -1,51 +1,51 @@
-import Usuario from "../models/usuario.js";
+import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import Rol from "../models/rol.js";
+import Role from "../models/rol.js";
 import dotenv from "dotenv";
 import path from "path";
-import subirArchivo from "../helpers/subir-archivo.js";
+import uploadFile from "../helpers/subir-archivo.js";
 import url from "url";
 import * as fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
-import Programa from "../models/programa.js";
+import Program from "../models/programa.js";
 import sendEmail from "../helpers/sendEmail.js";
 import { fileURLToPath } from "url";
 
 dotenv.config();
 
-export const Archivo = async (req, res) => {
+export const uploadUserFile = async (req, res) => {
   const { id } = req.params;
   try {
-    let archivo;
-    await subirArchivo(req.files, undefined)
-      .then((value) => (archivo = value))
+    let file;
+    await uploadFile(req.files, undefined)
+      .then((value) => (file = value))
       .catch((err) => console.log("Error : ", err));
-    let usuario = await Usuario.findById(id);
-    if (usuario.archivo) {
+    let user = await User.findById(id);
+    if (user.file) {
       const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-      const pathArchivo = path.join(__dirname, "../uploads/", usuario.archivo);
+      const filePath = path.join(__dirname, "../uploads/", user.file);
 
-      if (fs.existsSync(pathArchivo)) {
-        fs.unlinkSync(pathArchivo);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
       }
     }
-    usuario = await Usuario.findByIdAndUpdate(id, { archivo: archivo });
-    res.json({ archivo });
+    user = await User.findByIdAndUpdate(id, { file: file });
+    res.json({ file });
   } catch (error) {
-    res.status(400).json({ error, general: "Controlador" });
+    res.status(400).json({ error, general: "Controller" });
   }
 };
 
-export const mostrarArchivo = async (req, res) => {
+export const showUserFile = async (req, res) => {
   const { id } = req.params;
   try {
-    let usuario = await Usuario.findById(id);
-    if (usuario.archivo) {
+    let user = await User.findById(id);
+    if (user.file) {
       const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-      const pathArchivo = path.join(__dirname, "../uploads/", usuario.archivo);
-      if (fs.existsSync(pathArchivo)) {
-        const extension = path.extname(usuario.archivo).toLowerCase();
+      const filePath = path.join(__dirname, "../uploads/", user.file);
+      if (fs.existsSync(filePath)) {
+        const extension = path.extname(user.file).toLowerCase();
         let contentType = "application/octet-stream";
         const contentTypeMapping = {
           ".jpg": "image/jpeg",
@@ -57,8 +57,8 @@ export const mostrarArchivo = async (req, res) => {
           contentType = contentTypeMapping[extension];
         }
         res.set("Content-Type", contentType);
-        console.log(pathArchivo);
-        return res.sendFile(pathArchivo);
+        console.log(filePath);
+        return res.sendFile(filePath);
       }
     }
 
@@ -68,7 +68,7 @@ export const mostrarArchivo = async (req, res) => {
   }
 };
 
-export const archivoNube = async (req, res) => {
+export const cloudFile = async (req, res) => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
@@ -78,14 +78,14 @@ export const archivoNube = async (req, res) => {
 
   try {
     const { id } = req.params;
-    const { archivo } = req.files;
-    if (!archivo || !archivo.tempFilePath) {
+    const { file } = req.files;
+    if (!file || !file.tempFilePath) {
       return res.status(400).json({ error: "Archivo no proporcionado" });
     }
 
-    const extension = archivo.name.split(".").pop();
+    const extension = file.name.split(".").pop();
 
-    const { tempFilePath } = archivo;
+    const { tempFilePath } = file;
 
     const result = await cloudinary.uploader.upload(tempFilePath, {
       width: 250,
@@ -95,18 +95,18 @@ export const archivoNube = async (req, res) => {
       format: extension,
     });
 
-    let usuario = await Usuario.findById(id);
-    if (!usuario) {
+    let user = await User.findById(id);
+    if (!user) {
       return res.status(404).json({ error: "Evaluación no encontrada" });
     }
 
-    if (usuario.archivo) {
-      const nombreTemp = usuario.archivo.split("/");
-      const nombreArchivo = nombreTemp[nombreTemp.length - 1];
-      const [public_id] = nombreArchivo.split(".");
+    if (user.file) {
+      const tempName = user.file.split("/");
+      const fileName = tempName[tempName.length - 1];
+      const [public_id] = fileName.split(".");
       await cloudinary.uploader.destroy(public_id);
     }
-    usuario = await Usuario.findByIdAndUpdate(id, { archivo: result.url });
+    user = await User.findByIdAndUpdate(id, { file: result.url });
     res.json({ url: result.url });
   } catch (error) {
     console.error("Error en el controlador:", error);
@@ -114,12 +114,12 @@ export const archivoNube = async (req, res) => {
   }
 };
 
-export const mostrarArchivoNube = async (req, res) => {
+export const showCloudFile = async (req, res) => {
   const { id } = req.params;
   try {
-    let usuario = await Usuario.findById(id);
-    if (usuario.archivo) {
-      return res.json({ url: usuario.archivo });
+    let user = await User.findById(id);
+    if (user.file) {
+      return res.json({ url: user.file });
     }
     res.status(400).json({ msg: "Falta Imagen" });
   } catch (error) {
@@ -127,12 +127,12 @@ export const mostrarArchivoNube = async (req, res) => {
   }
 };
 
-export const hoja_vidaPerfil = async (req, res) => {
+export const curriculum_vitae = async (req, res) => {
   const { id } = req.params;
   try {
-    let usuario = await Usuario.findById(id);
-    if (usuario.hoja_vida) {
-      return res.json({ url: usuario.hoja_vida });
+    let user = await User.findById(id);
+    if (user.curriculum_vitae) {
+      return res.json({ url: user.curriculum_vitae });
     }
     res.status(400).json({ msg: "Falta Imagen" });
   } catch (error) {
@@ -140,7 +140,7 @@ export const hoja_vidaPerfil = async (req, res) => {
   }
 };
 
-export const postUsuario = async (req, res) => {
+export const postUser = async (req, res) => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
@@ -149,44 +149,45 @@ export const postUsuario = async (req, res) => {
   });
   try {
     const {
-      nombre,
-      apellidos,
-      identificacion,
-      fecha_nacimiento,
-      genero,
-      direccion,
-      telefono,
+      name,
+      last_name,
+      identification_type,
+      identification_number,
+      date_of_birth,
+      gender,
+      address,
+      phone,
       email,
       password,
-      ocupacion,
-      estado_civil,
-      nacionalidad,
-      contacto_emergencia,
-      archivo,
-      estado,
-      rol,
+      occupation,
+      marital_status,
+      nationality,
+      emergency_contact,
+      file,
+      status,
+      role,
     } = req.body;
 
-    let buscarRol = await Rol.findById(rol);
+    let searchRole = await Role.findById(role);
 
-    let red;
+    let knowledge_network;
 
-    const correo = await Usuario.findOne({ email: email });
+    const existingEmail = await User.findOne({ email: email });
 
-    if (correo) {
+    if (existingEmail) {
       return res.status(404).json({
         msg: `Se encontro un Usuario registrado con el correo ${email}`,
       });
     }
 
-    if (buscarRol.denominacion !== "Administrador".toLowerCase()) {
-      red = req.body.red;
+    if (searchRole.name !== "Administrador".toLowerCase()) {
+      knowledge_network = req.body.knowledge_network;
     }
 
-    const { hoja_vida } = req.files;
-    if (hoja_vida) {
-      const extension = hoja_vida.name.split(".").pop();
-      const { tempFilePath } = hoja_vida;
+    const { curriculum_vitae } = req.files;
+    if (curriculum_vitae) {
+      const extension = curriculum_vitae.name.split(".").pop();
+      const { tempFilePath } = curriculum_vitae;
       const result = await cloudinary.uploader.upload(tempFilePath, {
         width: 250,
         crop: "limit",
@@ -194,36 +195,39 @@ export const postUsuario = async (req, res) => {
         allowedFormats: ["jpg", "png", "docx", "xlsx", "pptx", "pdf"],
         format: extension,
       });
-      const buscar = await Usuario.findOne({ identificacion: identificacion });
-      if (buscar) {
+      const existingUser = await User.findOne({
+        identification_number: identification_number,
+      });
+      if (existingUser) {
         return res.status(400).json({
           msg: `Se encontro un Usuario registrado con ese número de identificacion`,
         });
       } else {
-        const nuevoUsuario = new Usuario({
-          nombre: nombre,
-          apellidos: apellidos,
-          identificacion: identificacion,
-          fecha_nacimiento: fecha_nacimiento,
-          genero: genero,
-          direccion: direccion,
-          telefono: telefono,
+        const newUser = new User({
+          name: name,
+          last_name: last_name,
+          identification_type: identification_type,
+          identification_number: identification_number,
+          date_of_birth: date_of_birth,
+          gender: gender,
+          address: address,
+          phone: phone,
           email: email,
           password: password,
-          ocupacion: ocupacion,
-          estado_civil: estado_civil,
-          nacionalidad: nacionalidad,
-          contacto_emergencia: contacto_emergencia,
-          hoja_vida: result.url,
-          archivo: archivo,
-          estado: estado,
-          red: red,
-          rol: rol,
+          occupation: occupation,
+          marital_status: marital_status,
+          nationality: nationality,
+          emergency_contact: emergency_contact,
+          curriculum_vitae: result.url,
+          file: file,
+          status: status,
+          knowledge_network: knowledge_network,
+          role: role,
         });
         const salt = bcrypt.genSaltSync();
-        nuevoUsuario.password = bcrypt.hashSync(req.body.password, salt);
-        const UsuarioCreado = await nuevoUsuario.save();
-        res.status(201).json(UsuarioCreado);
+        newUser.password = bcrypt.hashSync(req.body.password, salt);
+        const createdUser = await newUser.save();
+        res.status(201).json(createdUser);
       }
     }
   } catch (error) {
@@ -231,21 +235,21 @@ export const postUsuario = async (req, res) => {
   }
 };
 
-export const postUsuarioRed = async (req, res) => {
+export const postUserNetwork = async (req, res) => {
   const { id } = req.params;
-  const { red } = req.body;
+  const { knowledge_network } = req.body;
   try {
-    const redAgregada = await Usuario.updateOne(
+    const networkAdded = await User.updateOne(
       { _id: id },
-      { $addToSet: { red: red } }
+      { $addToSet: { knowledge_network: knowledge_network } }
     );
 
-    if (redAgregada.modifiedCount !== 0) {
-      return res.json({ redAgregada, msj: "Red agregada correctamente ✅" });
+    if (networkAdded.modifiedCount !== 0) {
+      return res.json({ networkAdded, msj: "Red agregada correctamente ✅" });
     } else {
-      return res
-        .status(400)
-        .json({ msg: `El usuario ya está ligado a esta red ${red}` });
+      return res.status(400).json({
+        msg: `El usuario ya está ligado a esta red ${knowledge_network}`,
+      });
     }
   } catch (error) {
     console.error(error);
@@ -253,37 +257,37 @@ export const postUsuarioRed = async (req, res) => {
   }
 };
 
-export const postUsuarioToken = async (req, res) => {
-  const { identificacion, password } = req.body;
+export const postUserToken = async (req, res) => {
+  const { identification_number, password } = req.body;
   try {
-    const buscar = await Usuario.findOne({ identificacion }).populate("rol");
-    console.log(buscar);
-    if (!buscar) {
+    const user = await User.findOne({ identification_number }).populate("role");
+    console.log(user);
+    if (!user) {
       return res.status(400).json({
         msg: "Usuario o password incorrectos",
       });
     }
-    if (buscar.estado === false) {
+    if (user.status === false) {
       return res.status(400).json({
         msg: "Usuario Inactivo",
       });
     }
-    const validPassword = bcrypt.compareSync(password, buscar.password);
+    const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) {
       return res.status(404).json({
         msg: "Usuario o password incorrectos",
       });
     }
     const token = jwt.sign(
-      { id: buscar.id, rol: buscar.rol.denominacion },
+      { id: user.id, role: user.role.name },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
     res.header("Authorization", token);
     res.json({
-      buscar,
+      user,
       token,
-      msj: "inicio de sesion exitoso ✅",
+      msg: "Successful login ✅",
     });
   } catch (error) {
     return res.status(500).json({
@@ -292,40 +296,42 @@ export const postUsuarioToken = async (req, res) => {
   }
 };
 
-export const getUsuario = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
-    const buscar = await Usuario.find().populate("red").populate("rol");
-    res.json({ buscar });
+    const users = await User.find()
+      .populate("knowledge_network")
+      .populate("role");
+    res.json({ users });
   } catch (error) {
     return res.status(500).json({ msg: "No se puede buscar los Usuarios" });
   }
 };
 
-export const getUsuarioCodigo = async (req, res) => {
+export const getUserByCode = async (req, res) => {
   try {
-    const { codigo } = req.params;
-    const usuario = await Usuario.find();
-    const resultados = usuario.filter((objeto) =>
-      objeto.codigo.toString().startsWith(codigo)
+    const { code } = req.params;
+    const users = await User.find();
+    const results = users.filter((object) =>
+      object.code.toString().startsWith(code)
     );
-    if (resultados) {
-      res.json(resultados);
+    if (results.length > 0) {
+      res.json(results);
     } else {
-      return res.status(404).json({ msg: `Sin coincidencias para ${codigo}` });
+      return res.status(404).json({ msg: `Sin coincidencias para ${code}` });
     }
   } catch (error) {
     return res.status(400).json({ error });
   }
 };
 
-export const getUsuarioId = async (req, res) => {
+export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const usuarioId = await Usuario.findById(id)
-      .populate("red")
-      .populate("rol");
-    if (usuarioId) {
-      res.json(usuarioId);
+    const userId = await User.findById(id)
+      .populate("knowledge_network")
+      .populate("role");
+    if (userId) {
+      res.json(userId);
     } else {
       return res.status(404).json({ msg: `Sin coincidencias para ${id}` });
     }
@@ -334,7 +340,7 @@ export const getUsuarioId = async (req, res) => {
   }
 };
 
-export const putUsuario = async (req, res) => {
+export const putUser = async (req, res) => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
@@ -345,63 +351,68 @@ export const putUsuario = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      nombre,
-      apellidos,
-      identificacion,
-      fecha_nacimiento,
-      genero,
-      direccion,
-      telefono,
+      name,
+      last_name,
+      identification_type,
+      identification_number,
+      date_of_birth,
+      gender,
+      address,
+      phone,
       email,
       password,
-      ocupacion,
-      estado_civil,
-      nacionalidad,
-      contacto_emergencia,
-      archivo,
-      rol,
+      occupation,
+      marital_status,
+      nationality,
+      emergency_contact,
+      file,
+      role,
     } = req.body;
 
-    let buscarRol = await Rol.findById(rol);
+    let searchRole = await Role.findById(role);
 
-    let red;
+    let knowledge_network;
 
-    const buscarIdentificacion = await Usuario.findOne({
-      identificacion: identificacion,
+    const existingIdentificationNumber = await User.findOne({
+      identification_number: identification_number,
     });
-    if (buscarIdentificacion && buscarIdentificacion._id.toString() !== id) {
+    if (
+      existingIdentificationNumber &&
+      existingIdentificationNumber._id.toString() !== id
+    ) {
       return res.status(404).json({
         msg: "Ya se encuentra un Usuario registrado con ese número de Identificación",
       });
     }
 
-    if (buscarRol.denominacion !== "Administrador".toLowerCase()) {
-      red = req.body.red;
+    if (searchRole.name !== "Administrador".toLowerCase()) {
+      knowledge_network = req.body.knowledge_network;
     }
 
     let updatedData = {
-      nombre: nombre,
-      apellidos: apellidos,
-      identificacion: identificacion,
-      fecha_nacimiento: fecha_nacimiento,
-      genero: genero,
-      direccion: direccion,
-      telefono: telefono,
+      name: name,
+      last_name: last_name,
+      identification_type: identification_type,
+      identification_number: identification_number,
+      date_of_birth: date_of_birth,
+      gender: gender,
+      address: address,
+      phone,
       email: email,
       password: password,
-      ocupacion: ocupacion,
-      estado_civil: estado_civil,
-      nacionalidad: nacionalidad,
-      contacto_emergencia: contacto_emergencia,
-      archivo: archivo,
-      rol: rol,
-      red: red,
+      occupation: occupation,
+      marital_status: marital_status,
+      nationality: nationality,
+      emergency_contact: emergency_contact,
+      file: file,
+      role: role,
+      knowledge_network: knowledge_network,
     };
 
-    if (req.files && req.files.hoja_vida) {
-      const hoja_vida = req.files.hoja_vida;
-      const extension = hoja_vida.name.split(".").pop();
-      const { tempFilePath } = hoja_vida;
+    if (req.files && req.files.curriculum_vitae) {
+      const curriculum_vitae = req.files.curriculum_vitae;
+      const extension = curriculum_vitae.name.split(".").pop();
+      const { tempFilePath } = curriculum_vitae;
       const result = await cloudinary.uploader.upload(tempFilePath, {
         width: 250,
         crop: "limit",
@@ -410,42 +421,42 @@ export const putUsuario = async (req, res) => {
         format: extension,
       });
 
-      const buscar = await Usuario.findById(id);
+      const existingUser = await User.findById(id);
 
-      if (buscar.hoja_vida) {
-        const nombreTemp = buscar.hoja_vida.split("/");
-        const nombrehoja_vida = nombreTemp[nombreTemp.length - 1];
-        const [public_id] = nombrehoja_vida.split(".");
+      if (existingUser && existingUser.curriculum_vitae) {
+        const tempName = existingUser.curriculum_vitae.split("/");
+        const nameCurriculum_vitae = tempName[tempName.length - 1];
+        const [public_id] = nameCurriculum_vitae.split(".");
         await cloudinary.uploader.destroy(public_id);
       }
 
-      updatedData.hoja_vida = result.url;
+      updatedData.curriculum_vitae = result.url;
     }
 
-    if (req.body && req.body.red) {
-      updatedData.red = red;
+    if (req.body && req.body.knowledge_network) {
+      updatedData.knowledge_network = knowledge_network;
     }
 
-    const buscarUsuario = await Usuario.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       { _id: id },
       { $set: updatedData },
       { new: true }
     );
-    res.status(201).json(buscarUsuario);
+    res.status(201).json(updatedUser);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
 
-export const patchUsuario = async (req, res) => {
+export const patchUser = async (req, res) => {
   const id = req.params.id;
-  const { estado } = req.body;
+  const { status } = req.body;
   try {
-    const usuario = await Usuario.findById(id);
-    if (usuario) {
-      usuario.estado = estado;
-      await usuario.save();
-      res.json(usuario);
+    const user = await User.findById(id);
+    if (user) {
+      user.status = status;
+      await user.save();
+      res.json(user);
     } else {
       res.status(404).json({ msg: `usuario con id: ${id} no encontrado` });
     }
@@ -455,10 +466,10 @@ export const patchUsuario = async (req, res) => {
   }
 };
 
-export const recuperaPassword = async (req, res) => {
+export const recoverPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await Usuario.findOne({ email: email }).populate("rol");
+    const user = await User.findOne({ email: email }).populate("role");
 
     if (!user) {
       return res
@@ -470,7 +481,7 @@ export const recuperaPassword = async (req, res) => {
     let link;
     let emailstatus = "OK";
     const token = jwt.sign(
-      { id: user.id, rol: user.rol.denominacion },
+      { id: user.id, role: user.role.name },
       process.env.RESET_PASSWORD_KEY,
       { expiresIn: "20m" }
     );
@@ -488,7 +499,7 @@ export const recuperaPassword = async (req, res) => {
       const imagenPath2 = path.join(__dirname, "..", "/imagenes/image-1.png");
 
       await sendEmail.sendMail({
-        from: '"forgot password 👻" <repositoriointeligente1@gmail.com>',
+        from: '"Recuperacion de Contraseña" <repositorioquasar@gmail.com>',
         to: user.email,
         subject: "Hello ✔",
         html: `<head>
@@ -659,7 +670,7 @@ export const recuperaPassword = async (req, res) => {
       <td>
       <!--primmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
       <div style="display: flex">
-    <h1 style="margin:auto;">Legado Sena</h1>
+    <h1 style="margin:auto;">COLMABE</h1>
     <img src="cid:logo" style="width: 80px !important" alt="logo-sena">
         </div>
 <!--primmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
@@ -760,7 +771,7 @@ export const recuperaPassword = async (req, res) => {
       <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
         <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Hola,</span></p>
     <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Le enviamos este correo electrónico en respuesta a su solicitud de restablecer su contraseña en el aplicativo Repositorio Inteligente SENA.</span></p>
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Le enviamos este correo electrónico en respuesta a su solicitud de restablecer su contraseña en el aplicativo del Colegio Manela Beltran - COLMABE.</span></p>
     <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
     <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Para restablecer su contraseña, siga el siguiente enlace: </span></p>
       </div>
@@ -833,7 +844,7 @@ export const recuperaPassword = async (req, res) => {
             
       <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
         <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px; color: #ecf0f1;">Atentamente</span></p>
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">Equipo &nbsp;Repositorio Inteligente SENA</span></p>
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">Equipo &nbsp;del Colegio Manela Beltran - COLMABE</span></p>
     <p style="font-size: 14px; line-height: 140%;"><a href="repositoriointeligente1@gmail.com" style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">repositoriointeligente1@gmail.com</a></p>
       </div>
     
@@ -1026,11 +1037,11 @@ export const newPassword = async (req, res) => {
   const { newPassword } = req.body;
   const resetToken = req.headers.reset;
   if (!resetToken || !newPassword) {
-    return res.status(400).json({ msg: "campos requeridos o invalidos" });
+    return res.status(400).json({ msg: "Campos requeridos o invalidos" });
   }
 
   try {
-    const user = await Usuario.findOne({ resetToken });
+    const user = await User.findOne({ resetToken });
 
     if (!user) {
       return res.status(400).json({ msg: "Token inválido" });
@@ -1061,11 +1072,11 @@ export const newPassword = async (req, res) => {
   }
 };
 
-export const deleteUsuario = async (req, res) => {
+export const deleteUser = async (req, res) => {
   const { id } = req.params;
-  const UsuarioEliminado = await Usuario.findOneAndDelete({ _id: id });
+  const deletedUser = await User.findOneAndDelete({ _id: id });
 
-  if (UsuarioEliminado) {
+  if (deletedUser) {
     return res.json({
       msg: `Se eliminó el Usuario: ${id} de la base de datos`,
     });

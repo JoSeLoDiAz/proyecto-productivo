@@ -372,7 +372,7 @@ let rutas = ref([])
 let hacia = ref("");
 
 const setDocumentTitle = () => {
-  document.title = `Legado Sena || Programa ${usePrograma.idPrograma.nombre}`;
+  document.title = `COLMABE || Programa ${usePrograma.idPrograma.nombre}`;
 };
 
 function ruta (ruta){
