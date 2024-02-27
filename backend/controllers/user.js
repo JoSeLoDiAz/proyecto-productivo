@@ -287,7 +287,7 @@ export const postUserToken = async (req, res) => {
     res.json({
       user,
       token,
-      msg: "Successful login ✅",
+      msg: "Inicio de Sesion Exitoso ✅",
     });
   } catch (error) {
     return res.status(500).json({
@@ -501,7 +501,7 @@ export const recoverPassword = async (req, res) => {
       await sendEmail.sendMail({
         from: '"Recuperacion de Contraseña" <repositorioquasar@gmail.com>',
         to: user.email,
-        subject: "Hello ✔",
+        subject: "Recuperacion de Contraseña - Repositorio",
         html: `<head>
     <!--[if gte mso 9]>
     <xml>
