@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Rol from "../models/rol.js";
+import Role from "../models/Role.js";
 
 export const isAdmin = async (req, res, next) => {
   const authHeader = req.header("Authorization");
@@ -33,8 +33,8 @@ export const isAdmin = async (req, res, next) => {
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const user = decoded;
-        const searchRole = await Rol.findOne({ _id: user.rol });
-        if (user && searchRole.denominacion === "Gestor de red") {
+        const searchRole = await Role.findOne({ _id: user.rol });
+        if (user && searchRole.denomination === "Gestor de red") {
           next();
         } else {
           res.status(403).json({ msg: "Acceso no autorizado" });
@@ -54,8 +54,8 @@ export const isAdmin = async (req, res, next) => {
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const user = decoded;
-        const searchRole = await Rol.findOne({ _id: user.rol });
-        if (user && searchRole.denominacion === "Instructor") {
+        const searchRole = await Role.findOne({ _id: user.role });
+        if (user && searchRole.denomination === "Instructor") {
           next();
         } else {
           res.status(403).json({ msg: "Acceso no autorizado" });

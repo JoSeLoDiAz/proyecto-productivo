@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
         "https://res.cloudinary.com/dlarprqi3/image/upload/v1700194266/zzh4fe3lyich2ixrqj6z.png",
     },
     status: { type: Boolean, require: true },
-    role: { type: mongoose.Schema.Types.ObjectId, ref: "Rol", require: true },
+    role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", require: true },
     knowledge_network: { type: mongoose.Schema.Types.ObjectId, ref: "Red" },
     resetToken: { type: String, default: "" },
     createdat: { type: Date, default: Date.now },

@@ -12,7 +12,7 @@ const myapp = createApp(App)
 const pinia = createPinia()
 pinia.use(createPersistedState(createPersistedState({
     paths: ['token',
-    'rol',
+    'role',
     'red',
     'idPrograma',
     'idDesarrollo',
@@ -25,7 +25,7 @@ pinia.use(createPersistedState(createPersistedState({
     'planeacion',
     'ejecucion',
     'evaluacion',
-    'idRol',
+    'idRole',
     'userId',
     'idRed',
     'idCentro'

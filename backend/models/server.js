@@ -15,7 +15,7 @@ import proyecto from "../routers/proyecto.js"
 import red from "../routers/red.js"
 import registro from "../routers/registro.js"
 import retroalimentacion from "../routers/retroalimentacion.js"
-import rol from "../routers/rol.js"
+import role from "../routers/role.js"
 import sedes from "../routers/sedes.js"
 import usuario from "../routers/user.js"
 import configuracion from "../routers/configuracion.js"
@@ -50,7 +50,7 @@ conectarDB(){
         this.app.use('/red',red)
         this.app.use('/registro',registro)
         this.app.use('/retroalimentacion',retroalimentacion)
-        this.app.use('/rol',rol)
+        this.app.use('/role',role)
         this.app.use('/sedes',sedes)
         this.app.use('/usuario',usuario)
         this.app.use('/configuracion',configuracion)
