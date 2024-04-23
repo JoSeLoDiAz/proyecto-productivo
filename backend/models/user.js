@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     nationality: { type: String, require: true },
     medical_information: { type: String, require: true },
     emergency_contact: { type: String, require: true },
-    curriculum_vitae: { type: String, require: true },
+    curriculum_vitae: { type: String },
     file: {
       type: String,
       default:

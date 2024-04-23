@@ -9,7 +9,7 @@ const router= Router()
 import {
 postRole,
 getRole,
-getRoleCodigo,
+getRoleCode,
 getRoleId,
 putRole,
 patchRole,
@@ -23,7 +23,7 @@ router.post("/",[
 
 router.get('/', getRole);
 
-router.get('/:codigo',getRoleCodigo);
+router.get('/:codigo',getRoleCode);
 
 router.get('/id/:id',getRoleId);
 

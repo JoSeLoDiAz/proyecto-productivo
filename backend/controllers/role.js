@@ -1,41 +1,41 @@
-import Role from "../models/Role.js";
+import Role from "../models/role.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 export const postRole = async (req, res) => {
-  const nuevoRole = new Role(req.body);
-  const buscar = await Role.findOne({ denomination: nuevoRole.denomination });
-  if (buscar) {
+  const newRole = new Role(req.body);
+  const search = await Role.findOne({ denomination: newRole.denomination });
+  if (search) {
     return res
       .status(400)
-      .json({ msg: `Se encontro un Role registrado con ese Nombre` });
+      .json({ msg: `Se encontro un Rol registrado con ese Nombre` });
   } else {
-    const RoleCreado = await nuevoRole.save();
-    res.status(201).json(RoleCreado);
+    const roleCreated = await newRole.save();
+    res.status(201).json(roleCreated);
   }
 };
 
 export const getRole = async (req, res) => {
   try {
-    const buscar = await Rolee.find();
-    res.json({ buscar });
+    const search = await Role.find();
+    res.json({ search });
   } catch (error) {
-    res.status(500).json({ msg: "No se puede buscar los Roles" });
+    res.status(500).json({ msg: "No se puede search los Roles" });
   }
 };
 
-export const getRoleCodigo = async (req, res) => {
+export const getRoleCode = async (req, res) => {
   try {
-    const { codigo } = req.params;
-    const Rolee = await Rolee.find();
-    const resultados = Rolee.filter((objeto) =>
-      objeto.codigo.toString().startsWith(codigo)
+    const { code } = req.params;
+    const Role = await Role.find();
+    const results = Role.filter((objeto) =>
+      objeto.code.toString().startsWith(code)
     );
-    console.log(resultados);
-    if (resultados) {
-      res.json(resultados);
+    console.log(results);
+    if (results) {
+      res.json(results);
     } else {
-      return res.status(404).json({ msg: `Sin coincidencias para ${codigo}` });
+      return res.status(404).json({ msg: `Sin coincidencias para ${code}` });
     }
   } catch (error) {
     return res.status(400).json({ error });
@@ -45,7 +45,7 @@ export const getRoleCodigo = async (req, res) => {
 export const getRoleId = async (req, res) => {
   try {
     const { id } = req.params;
-    const Rolee = await Rolee.findById({ _id: id });
+    const Role = await Role.findById({ _id: id });
     if (Role) {
       res.json(Role);
     } else {
@@ -59,27 +59,29 @@ export const getRoleId = async (req, res) => {
 export const putRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const buscarNombre = await Role.findOne({ denomination: req.body.denomination });
-    if (buscarNombre && buscarNombre._id.toString() !== id) {
+    const searchName = await Role.findOne({
+      denomination: req.body.denomination,
+    });
+    if (searchName && searchName._id.toString() !== id) {
       return res.status(404).json({
-        msg: "Ya se encuentra un Role registrado con ese Nombre",
+        msg: "Ya se encuentra un Rol registrado con ese Nombre",
       });
     }
-    const RoleActualizado = await Role.findByIdAndUpdate(
+    const roleUpdated = await Role.findByIdAndUpdate(
       { _id: id },
       { $set: req.body },
       {
         new: true,
       }
     );
-    if (RoleActualizado !== null) {
-      res.status(200).json(RoleActualizado);
+    if (roleUpdated !== null) {
+      res.status(200).json(roleUpdated);
     } else {
-      return res.status(404).json({ msg: `Role no encontrado.` });
+      return res.status(404).json({ msg: `Rol no encontrado.` });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "No se pudo actualizar el Role." });
+    res.status(500).json({ error: "No se pudo actualizar el Rol." });
   }
 };
 
@@ -87,32 +89,32 @@ export const patchRole = async (req, res) => {
   const id = req.params.id;
   const { status } = req.body;
   try {
-    const Rolee = await Rolee.findById(id);
-    if (Rolee) {
-      Rolee.status = status;
-      await Rolee.save();
-      res.json(Rolee);
+    const Role = await Role.findById(id);
+    if (Role) {
+      Role.status = status;
+      await Role.save();
+      res.json(Role);
     } else {
       console.log(`id: ${id} no encontrado`);
-      res.status(404).json({ msg: `Role con id: ${id} no encontrado` });
+      res.status(404).json({ msg: `Rol con id: ${id} no encontrado` });
     }
   } catch (error) {
-    console.log(`Error al actualizar el Role: ${error}`);
+    console.log(`Error al actualizar el Rol: ${error}`);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };
 
 export const deleteRole = async (req, res) => {
   const { id } = req.params;
-  const RoleEliminado = await Rolee.findOneAndDelete({ _id: id });
+  const roleDeleted = await Role.findOneAndDelete({ _id: id });
 
-  if (RoleEliminado) {
+  if (roleDeleted) {
     return res.json({
-      msg: `Se eliminó el Role: ${id} de la base de datos`,
+      msg: `Se eliminó el Rol: ${id} de la base de datos`,
     });
   } else {
     res
       .status(400)
-      .json({ msg: `El Role: ${id} no se encuentra en la base de datos` });
+      .json({ msg: `El Rol: ${id} no se encuentra en la base de datos` });
   }
 };

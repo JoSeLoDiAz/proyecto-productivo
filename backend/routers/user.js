@@ -249,7 +249,7 @@ router.put(
 
 router.put("/new/password", newPassword);
 
-router.patch("/:id", patchUser);
+router.patch("/:id" , patchUser);
 
 router.delete("/:id", deleteUser);
 
