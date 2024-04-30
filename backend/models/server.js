@@ -1,7 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 import ambiente from "../routers/ambiente.js";
-import centro from "../routers/centro.js";
+import campus from "../routers/campus.js";
 import ciudad from "../routers/ciudades.js";
 import desarrollo from "../routers/desarrollo.js";
 import evaluacion from "../routers/evaluacion.js";
@@ -39,7 +39,7 @@ class Server {
   }
   routes() {
     this.app.use("/ambiente", ambiente);
-    this.app.use("/centro", centro);
+    this.app.use("/campus", campus);
     this.app.use("/ciudad", ciudad);
     this.app.use("/desarrollo", desarrollo);
     this.app.use("/evaluacion", evaluacion);

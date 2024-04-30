@@ -6,14 +6,14 @@ import { isAdmin } from "../helpers/validate-user.js";
 const router= Router()
 
 import {
-postCentro,
-getCentro,
-getCentroCodigo,
-getCentroId,
-putCentro,
-patchCentro,
-deleteCentro
-} from '../controllers/centro.js';
+postCampus,
+getCampus,
+getCampusCode,
+getCampusId,
+putCampus,
+patchCampus,
+deleteCampus
+} from '../controllers/campus.js';
 
 router.post("/",[
     check("codigo","Complete el campo Codigo").trim().not().isEmpty().toLowerCase(),
@@ -22,13 +22,13 @@ router.post("/",[
     check("direccion","Complete el campo dirección").trim().not().isEmpty().toLowerCase(),
     check("ciudad","Ciudad Invalida").trim().isMongoId(),
     validateFields
-],postCentro)
+],postCampus)
 
-router.get('/', getCentro);
+router.get('/', getCampus);
 
-router.get('/:codigo',getCentroCodigo);
+router.get('/:codigo',getCampusCode);
 
-router.get('/id/:id',getCentroId);
+router.get('/id/:id',getCampusId);
 
 router.put('/:id',[
     check("codigo","Complete el campo Codigo").trim().not().isEmpty().toLowerCase(),
@@ -37,10 +37,10 @@ router.put('/:id',[
     check("direccion","Complete el campo Dirección").trim().not().isEmpty().toLowerCase(),
     check("ciudad","Ciudad Invalida").trim().isMongoId(),
      validateFields
-], putCentro);
+], putCampus);
 
-router.patch('/:id',patchCentro)
+router.patch('/:id',patchCampus)
 
-router.delete('/:id', deleteCentro);
+router.delete('/:id', deleteCampus);
 
 export default router;
