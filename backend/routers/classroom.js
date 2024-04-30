@@ -5,13 +5,13 @@ import { Router } from "express";
 const router = Router();
 
 import {
-  postAmbiente,
-  getAmbiente,
-  getAmbienteNombre,
-  putAmbiente,
-  patchAmbiente,
-  deleteAmbiente,
-} from "../controllers/ambiente.js";
+  postClassroom,
+  getClassroom,
+  getClassroomName,
+  putClassroom,
+  patchClassroom,
+  deleteClassroom,
+} from "../controllers/classroom.js";
 
 router.post(
   "/",
@@ -39,12 +39,12 @@ router.post(
     check("sede", "Sede Invalida").trim().isMongoId(),
     validateFields,
   ],
-  postAmbiente
+  postClassroom
 );
 
-router.get("/", getAmbiente);
+router.get("/", getClassroom);
 
-router.get("/:nombre", getAmbienteNombre);
+router.get("/:nombre", getClassroomName);
 
 router.put(
   "/:id",
@@ -71,11 +71,11 @@ router.put(
     check("sede", "Sede Invalida").trim().isMongoId(),
     validateFields,
   ],
-  putAmbiente
+  putClassroom
 );
 
-router.patch("/:id", patchAmbiente);
+router.patch("/:id", patchClassroom);
 
-router.delete("/:id", deleteAmbiente);
+router.delete("/:id", deleteClassroom);
 
 export default router;

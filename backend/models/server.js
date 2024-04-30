@@ -1,6 +1,6 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import ambiente from "../routers/ambiente.js";
+import classroom from "../routers/classroom.js";
 import campus from "../routers/campus.js";
 import ciudad from "../routers/ciudades.js";
 import desarrollo from "../routers/desarrollo.js";
@@ -38,7 +38,7 @@ class Server {
       );
   }
   routes() {
-    this.app.use("/ambiente", ambiente);
+    this.app.use("/classroom", classroom);
     this.app.use("/campus", campus);
     this.app.use("/ciudad", ciudad);
     this.app.use("/desarrollo", desarrollo);
