@@ -16,7 +16,7 @@ import red from "../routers/red.js";
 import registro from "../routers/registro.js";
 import retroalimentacion from "../routers/retroalimentacion.js";
 import role from "../routers/role.js";
-import sedes from "../routers/sedes.js";
+import module from "../routers/module.js";
 import user from "../routers/user.js";
 import configuracion from "../routers/configuracion.js";
 import cors from "cors";
@@ -54,7 +54,7 @@ class Server {
     this.app.use("/registro", registro);
     this.app.use("/retroalimentacion", retroalimentacion);
     this.app.use("/role", role);
-    this.app.use("/sedes", sedes);
+    this.app.use("/module", module);
     this.app.use("/user", user);
     this.app.use("/configuracion", configuracion);
   }
