@@ -8,7 +8,7 @@ export const postCampus = async (req, res) => {
   if (search) {
     return res
       .status(400)
-      .json({ msg: `Se encontro una Sede registrade con ese codigo` });
+      .json({ msg: `Se encontro una Sede registrada con ese codigo` });
   } else {
     const createdCampus = await newCampus.save();
     res.status(201).json(createdCampus);

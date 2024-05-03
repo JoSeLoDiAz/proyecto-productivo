@@ -33,8 +33,8 @@ router.post("/proyecto/:id",postDesarrolloProyecto)
 router.post("/planeacion/:id",postDesarrolloPlaneacion);
 
 router.post("/agregar/guia/:id",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("fase","Complete el campo Fase").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("fase","Ingrese el campo Fase").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postDesarrolloGuia);
 
@@ -60,8 +60,8 @@ router.get('/:codigo',getDesarrolloCodigo);
 router.get('/id/:id',getDesarrolloId);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("fase","Complete el campo Fase").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("fase","Ingrese el campo Fase").trim().not().isEmpty().toLowerCase(),
      validateFields
 ], putDesarrollo);
 

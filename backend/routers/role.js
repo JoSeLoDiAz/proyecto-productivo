@@ -17,7 +17,7 @@ deleteRole
 } from '../controllers/role.js';
 
 router.post("/",[
-    check("denomination","Complete el campo Denominación").trim().not().isEmpty().toLowerCase(),
+    check("denomination","Ingrese el campo Denominación").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postRole)
 
@@ -28,7 +28,7 @@ router.get('/:codigo',getRoleCode);
 router.get('/id/:id',getRoleId);
 
 router.put('/:id',[
-    check("denomination","Complete el campo Denominación").trim().not().isEmpty().toLowerCase(),
+    check("denomination","Ingrese el campo Denominación").trim().not().isEmpty().toLowerCase(),
     validateFields
 ], putRole);
 

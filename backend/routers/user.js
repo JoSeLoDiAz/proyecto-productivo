@@ -49,22 +49,22 @@ router.get(
 router.post(
   "/",
   [
-    check("name", "complete el campo Nombre")
+    check("name", "Ingrese el campo Nombre")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("last_name", "Complete el campo Apellidos")
+    check("last_name", "Ingrese el campo Apellidos")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("identification_type", "Complete el campo Tipo de Identificación")
+    check("identification_type", "Ingrese el campo Tipo de Identificación")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("identification_number", "Complete el campo Identificación")
+    check("identification_number", "Ingrese el campo Numero de Identificación")
       .trim()
       .not()
       .isEmpty()
@@ -76,18 +76,18 @@ router.post(
       .trim()
       .isLength({ min: 8, max: 15 })
       .toLowerCase(),
-    check("date_of_birth", "Complete la Fecha de Nacimiento")
+    check("date_of_birth", "Ingrese la Fecha de Nacimiento")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("gender", "Complete el Genero").trim().not().isEmpty().toLowerCase(),
-    check("address", "Complete la Dirección")
+    check("gender", "Ingrese el Genero").trim().not().isEmpty().toLowerCase(),
+    check("address", "Ingrese la Dirección")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("phone", "Complete el campo celular")
+    check("phone", "Ingrese el campo celular")
       .trim()
       .not()
       .isEmpty()
@@ -96,23 +96,27 @@ router.post(
       .trim()
       .isLength({ min: 8, max: 12 })
       .toLowerCase(),
-    check("email", "Complete el Campo Email").trim().not().isEmpty().isEmail(),
-    check("password", "Complete el campo Contraseña").trim().not().isEmpty(),
-    check("occupation", "Complete el campo Ocupación")
+    check("email", "Ingrese el Campo Email").trim().not().isEmpty().isEmail(),
+    check("password", "Ingrese el campo Contraseña").trim().not().isEmpty(),
+    check(
+      "password",
+      "La contraseña debe tener una longitud minima de 8 caracteres"
+    ).isLength({ min: 8 }),
+    check("occupation", "Ingrese el campo Ocupación")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("marital_status", "Complete el campo Estado Civil")
+    check("marital_status", "Ingrese el campo Estado Civil")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("nationality", "Complete el campo Nacionalidad")
+    check("nationality", "Ingrese el campo Nacionalidad")
       .trim()
       .not()
       .isEmpty(),
-    check("emergency_contact", "Complete el campo Contacto de Emergencia")
+    check("emergency_contact", "Ingrese el campo Contacto de Emergencia")
       .trim()
       .not()
       .isEmpty()
@@ -164,22 +168,22 @@ router.get("/id/:id", getUserById);
 router.put(
   "/:id",
   [
-    check("name", "complete el campo Nombre")
+    check("name", "Ingrese el campo Nombre")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("last_name", "Complete el campo Apellidos")
+    check("last_name", "Ingrese el campo Apellidos")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("identification_type", "Complete el campo Tipo de Identificación")
+    check("identification_type", "Ingrese el campo Tipo de Identificación")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("identification_number", "Complete el campo Identificación")
+    check("identification_number", "Ingrese el campo Numero de Identificación")
       .trim()
       .not()
       .isEmpty()
@@ -191,18 +195,18 @@ router.put(
       .trim()
       .isLength({ min: 8, max: 15 })
       .toLowerCase(),
-    check("date_of_birth", "Complete la Fecha de Nacimiento")
+    check("date_of_birth", "Ingrese la Fecha de Nacimiento")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("gender", "Complete el Genero").trim().not().isEmpty().toLowerCase(),
-    check("address", "Complete la Dirección")
+    check("gender", "Ingrese el Genero").trim().not().isEmpty().toLowerCase(),
+    check("address", "Ingrese la Dirección")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("phone", "Complete el campo celular")
+    check("phone", "Ingrese el campo celular")
       .trim()
       .not()
       .isEmpty()
@@ -211,23 +215,23 @@ router.put(
       .trim()
       .isLength({ min: 8, max: 12 })
       .toLowerCase(),
-    check("email", "Complete el Campo Email").trim().not().isEmpty().isEmail(),
-    check("password", "Complete el campo Contraseña").trim().not().isEmpty(),
-    check("occupation", "Complete el campo Ocupación")
+    check("email", "Ingrese el Campo Email").trim().not().isEmpty().isEmail(),
+    check("password", "Ingrese el campo Contraseña").trim().not().isEmpty(),
+    check("occupation", "Ingrese el campo Ocupación")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("marital_status", "Complete el campo Estado Civil")
+    check("marital_status", "Ingrese el campo Estado Civil")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("nationality", "Complete el campo Nacionalidad")
+    check("nationality", "Ingrese el campo Nacionalidad")
       .trim()
       .not()
       .isEmpty(),
-    check("emergency_contact", "Complete el campo Contacto de Emergencia")
+    check("emergency_contact", "Ingrese el campo Contacto de Emergencia")
       .trim()
       .not()
       .isEmpty()
@@ -249,7 +253,7 @@ router.put(
 
 router.put("/new/password", newPassword);
 
-router.patch("/:id" , patchUser);
+router.patch("/:id", patchUser);
 
 router.delete("/:id", deleteUser);
 

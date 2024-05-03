@@ -28,11 +28,11 @@ router.post('/archivo/:id',[
 ])
 
 router.post("/",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("codigo_ficha","Complete el campo Codigo ficha").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("codigo_ficha","Ingrese el campo Codigo ficha").trim().not().isEmpty().toLowerCase(),
     check("codigo_ficha","El codigo de la ficha debe tener entre 4 y 12 caracteres").trim().isLength({min:4,max:12}).toLowerCase(),
-    check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
-    check("fecha","Complete el campo Fecha").trim().not().isEmpty().toLowerCase(),
+    check("descripcion","Ingrese el campo Descripción").trim().not().isEmpty().toLowerCase(),
+    check("fecha","Ingrese el campo Fecha").trim().not().isEmpty().toLowerCase(),
     check("programa","Programa Invalido").trim().isMongoId(),
     validateFields
 ],postRetroalimentacion)
@@ -47,11 +47,11 @@ router.get('/', getRetroalimentacion);
 router.get('/:codigo',getRetroalimentacionCodigo);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("codigo_ficha","Complete el campo Codigo ficha").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("codigo_ficha","Ingrese el campo Codigo ficha").trim().not().isEmpty().toLowerCase(),
     check("codigo_ficha","El codigo de la ficha debe tener entre 4 y 12 caracteres").trim().isLength({min:4,max:12}).toLowerCase(),
-    check("descripcion","Complete el campo Descripción").trim().not().isEmpty().toLowerCase(),
-    check("fecha","Complete el campo Fecha").trim().not().isEmpty().toLowerCase(),
+    check("descripcion","Ingrese el campo Descripción").trim().not().isEmpty().toLowerCase(),
+    check("fecha","Ingrese el campo Fecha").trim().not().isEmpty().toLowerCase(),
     check("programa","Programa Invalido").trim().isMongoId(),
     validateFields
 ], putRetroalimentacion);

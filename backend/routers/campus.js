@@ -16,11 +16,11 @@ deleteCampus
 } from '../controllers/campus.js';
 
 router.post("/",[
-    check("codigo","Complete el campo Codigo").trim().not().isEmpty().toLowerCase(),
-    check("codigo","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:5}).toLowerCase(),
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("direccion","Complete el campo dirección").trim().not().isEmpty().toLowerCase(),
-    check("ciudad","Ciudad Invalida").trim().isMongoId(),
+    check("code","Ingrese el Codigo asignado a la Sede").trim().not().isEmpty().toLowerCase(),
+    check("code","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:20}).toLowerCase(),
+    check("name","Ingrese el Nombre de la Sede").trim().not().isEmpty().toLowerCase(),
+    check("address","Ingrese la dirección de la Sede").trim().not().isEmpty().toLowerCase(),
+    check("city","La Ciudad Ingresada no es valida, Reintente").trim().isMongoId(),
     validateFields
 ],postCampus)
 
@@ -31,11 +31,11 @@ router.get('/:codigo',getCampusCode);
 router.get('/id/:id',getCampusId);
 
 router.put('/:id',[
-    check("codigo","Complete el campo Codigo").trim().not().isEmpty().toLowerCase(),
-    check("codigo","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:5}).toLowerCase(),
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("direccion","Complete el campo Dirección").trim().not().isEmpty().toLowerCase(),
-    check("ciudad","Ciudad Invalida").trim().isMongoId(),
+    check("code","Ingrese el Codigo asignado a la Sede").trim().not().isEmpty().toLowerCase(),
+    check("code","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:20}).toLowerCase(),
+    check("name"," de la Sede").trim().not().isEmpty().toLowerCase(),
+    check("address","Ingrese la dirección de la Sede").trim().not().isEmpty().toLowerCase(),
+    check("city","La Ciudad Ingresada no es valida, Reintente").trim().isMongoId(),
      validateFields
 ], putCampus);
 

@@ -16,27 +16,27 @@ import {
 router.post(
   "/",
   [
-    check("nombre", "Complete el campo Nombre")
+    check("name", "Ingrese el Nombre del Aula")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("capacidad", "complete el campo Capacidad")
+    check("capacity", "Ingrese la Capacidad del Aula")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("tipo_ambiente", "Complete el campo Tipo de ambiente")
+    check("room_type", "Ingrese el Tipo de Aula (Informatica, Sociales, Ingles, Etc...)")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("equipamiento", "Complete el campo Equipamiento")
+    check("equipment", "Ingrese que equipamento tiene el Aula (2 computadores, impresora, etc...)")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("sede", "Sede Invalida").trim().isMongoId(),
+    check("module", "La sede dada no es Valida, reintente").trim().isMongoId(),
     validateFields,
   ],
   postClassroom
@@ -49,26 +49,26 @@ router.get("/:nombre", getClassroomName);
 router.put(
   "/:id",
   [
-    check("nombre", "Complete el campo Nombre")
+    check("name", "Ingrese el Nombre del Aula")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("capacidad", "complete el campo Capacidad")
+    check("capacity", "Ingrese la Capacidad del Aula")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("tipo_ambiente", "Complete el campo Tipo de ambiente")
+    check("room_type", "Ingrese el Tipo de Aula (Informatica, Sociales, Ingles, Etc...)")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("equipamiento", "Complete el campo Equipamiento")
+    check("equipment", "Ingrese que equipamento tiene el Aula (2 computadores, impresora, etc...)")
       .trim()
       .not()
       .isEmpty(),
-    check("sede", "Sede Invalida").trim().isMongoId(),
+    check("module", "La sede dada no es Valida, reintente").trim().isMongoId(),
     validateFields,
   ],
   putClassroom

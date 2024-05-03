@@ -17,26 +17,22 @@ import {
 router.post(
   "/",
   [
-    check("nombre", "Complete el campo Nombre")
+    check("name", "Ingrese el campo Nombre")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("direccion", "Complete el campo Dirección")
+    check("location", "Ingrese el campo Ubicacion")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("contacto", "Complete el campo Contacto")
+    check("classrooms", "Ingrese el campo Numero de Aulas de Clase")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("contacto", "El contacto excede los caracteres permitidos")
-      .trim()
-      .isLength({ min: 10, max: 12 })
-      .toLowerCase(),
-    check("centro", "Centro Invalido").trim().isMongoId(),
+    check("campus", "Sede No valida, reintente por favor").trim().isMongoId(),
     validateFields,
   ],
   postModules
@@ -49,26 +45,26 @@ router.get("/:codigo", getModulesCode);
 router.put(
   "/:id",
   [
-    check("nombre", "Complete el campo Nombre")
+    check("name", "Ingrese el campo Nombre")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("direccion", "Complete el campo Dirección")
+    check("location", "Ingrese el campo Dirección")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("contacto", "Complete el campo Contacto")
+    check("classrooms", "Ingrese el campo Contacto")
       .trim()
       .not()
       .isEmpty()
       .toLowerCase(),
-    check("contacto", "El contacto excede los caracteres permitidos")
+    check("classrooms", "El contacto excede los caracteres permitidos")
       .trim()
       .isLength({ min: 10, max: 12 })
       .toLowerCase(),
-    check("centro", "Centro Invalido").trim().isMongoId(),
+    check("campus", "Sede No valida, reintente por favor").trim().isMongoId(),
     validateFields,
   ],
   putModules

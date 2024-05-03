@@ -15,9 +15,9 @@ deleteMaterialFormacion
 } from '../controllers/materialFormacion.js';
 
 router.post("/",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("tipo","Complete el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
-    check("descripcion","Complete el campo Descripcion").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("tipo","Ingrese el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
+    check("descripcion","Ingrese el campo Descripcion").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postMaterialFormacion)
 
@@ -26,9 +26,9 @@ router.get('/', getMaterialFormacion);
 router.get('/:codigo',getMaterialFormacionCodigo);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("tipo","Complete el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
-    check("descripcion","Complete el campo Descripcion").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("tipo","Ingrese el campo Tipo de Material").trim().not().isEmpty().toLowerCase(),
+    check("descripcion","Ingrese el campo Descripcion").trim().not().isEmpty().toLowerCase(),
     validateFields
 ], putMaterialFormacion);
 

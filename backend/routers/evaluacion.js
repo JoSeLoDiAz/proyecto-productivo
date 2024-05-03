@@ -24,7 +24,7 @@ router.post('/archivo/:id',[
 ],Archivo)
 
 router.post("/",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postEvaluacion)
 
@@ -40,7 +40,7 @@ router.get('/:codigo',getEvaluacionCodigo);
 router.get('/id/:id',getEvaluacionId);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ], putEvaluacion);
 

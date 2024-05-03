@@ -27,12 +27,12 @@ router.post('/archivo/:id',[
 
 // ,isAdmin
 router.post('/agregar/evaluacion/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postGuiaEvaluacion)
 
 router.post('/agregar/material/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postGuiaMaterial)
 
@@ -48,9 +48,9 @@ router.get('/:codigo',getGuiaCodigo);
 router.get('/id/:id',getGuiaId);
 
 router.put('/:id',[
-    check("codigo","Complete el campo Codigo").trim().not().isEmpty(),
+    check("codigo","Ingrese el campo Codigo").trim().not().isEmpty(),
     check("codigo","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:5}),
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty(),
     validateFields
 ], putGuia);
 

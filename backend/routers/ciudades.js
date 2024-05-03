@@ -16,11 +16,11 @@ deleteCiudad
 } from '../controllers/ciudades.js';
 
 router.post("/",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("daneciudad","Complete el campo Codino DANE Ciudad con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
-    check("region","Complete el campo Region").trim().not().isEmpty().toLowerCase(),
-    check("departamento","Complete el campo Departamento").trim().not().isEmpty().toLowerCase(),
-    check("danedepartamento","Complete el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("daneciudad","Ingrese el campo Codino DANE Ciudad con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
+    check("region","Ingrese el campo Region").trim().not().isEmpty().toLowerCase(),
+    check("departamento","Ingrese el campo Departamento").trim().not().isEmpty().toLowerCase(),
+    check("danedepartamento","Ingrese el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
     validateFields
 ],postCiudad)
 
@@ -29,11 +29,11 @@ router.get('/', getCiudad);
 router.get('/:codigo',getCiudadCodigo);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("daneciudad","Complete el campo Codino DANE Ciudad con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
-    check("region","Complete el campo Region").trim().not().isEmpty().toLowerCase(),
-    check("departamento","Complete el campo Departamento").trim().not().isEmpty().toLowerCase(),
-    check("danedepartamento","Complete el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("daneciudad","Ingrese el campo Codino DANE Ciudad con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
+    check("region","Ingrese el campo Region").trim().not().isEmpty().toLowerCase(),
+    check("departamento","Ingrese el campo Departamento").trim().not().isEmpty().toLowerCase(),
+    check("danedepartamento","Ingrese el campo Codigo DANE Departamento con minimo 5 digitos").trim().not().isEmpty().isLength({min:5,max:8}),
     validateFields
 ], putCiudad);
 

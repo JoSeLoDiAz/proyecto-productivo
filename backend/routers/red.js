@@ -17,15 +17,15 @@ deleteRed
 } from '../controllers/red.js';
 
 router.post("/",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ],postRed)
 
 router.post("/agregar/programa/:id",[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
-    check("modalidad","Complete el campo Modalidad").trim().not().isEmpty().toLowerCase(),
-    check("requisitos","Complete el campo Requisitos").trim().not().isEmpty().toLowerCase(),
-    check("version","Complete el campo Versión").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("modalidad","Ingrese el campo Modalidad").trim().not().isEmpty().toLowerCase(),
+    check("requisitos","Ingrese el campo Requisitos").trim().not().isEmpty().toLowerCase(),
+    check("version","Ingrese el campo Versión").trim().not().isEmpty().toLowerCase(),
     check("version","La versión excede los caracteres permitidos").trim().isLength({min:1,max:4}).toLowerCase(),
     check("nivel","Nivel invalido").trim().isMongoId(),
     validateFields
@@ -38,7 +38,7 @@ router.get('/:codigo',getRedCodigo);
 router.get('/id/:id',getRedId);
 
 router.put('/:id',[
-    check("nombre","Complete el campo Nombre").trim().not().isEmpty().toLowerCase(),
+    check("nombre","Ingrese el campo Nombre").trim().not().isEmpty().toLowerCase(),
     validateFields
 ], putRed);
 
