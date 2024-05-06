@@ -20,7 +20,7 @@ router.post("/",[
     check("code","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:20}).toLowerCase(),
     check("name","Ingrese el Nombre de la Sede").trim().not().isEmpty().toLowerCase(),
     check("address","Ingrese la dirección de la Sede").trim().not().isEmpty().toLowerCase(),
-    check("city","La Ciudad Ingresada no es valida, Reintente").trim().isMongoId(),
+    check("city","La Ciudad Ingresada no es valida, Reintente").trim().not().isEmpty(),
     validateFields
 ],postCampus)
 
@@ -35,7 +35,7 @@ router.put('/:id',[
     check("code","El codigo excede los caracteres permitidos").trim().isLength({min:2,max:20}).toLowerCase(),
     check("name"," de la Sede").trim().not().isEmpty().toLowerCase(),
     check("address","Ingrese la dirección de la Sede").trim().not().isEmpty().toLowerCase(),
-    check("city","La Ciudad Ingresada no es valida, Reintente").trim().isMongoId(),
+    check("city","La Ciudad Ingresada no es valida, Reintente").trim().not().isEmpty(),
      validateFields
 ], putCampus);
 

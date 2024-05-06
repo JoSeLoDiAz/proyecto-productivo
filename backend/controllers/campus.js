@@ -17,14 +17,12 @@ export const postCampus = async (req, res) => {
 
 export const getCampus = async (req, res) => {
   try {
-    const search = await Campus.find()
-    .populate('city');
+    const search = await Campus.find();
     res.json({ search });
   } catch (error) {
     res.status(500).json({ msg: "No se pueden buscar las Sedes" });
   }
 };
-
 
 export const getCampusCode = async (req, res) => {
   try {
@@ -37,21 +35,25 @@ export const getCampusCode = async (req, res) => {
     if (results) {
       res.json(results);
     } else {
-      return res.status(404).json({ msg: `Sin coincidencias para la Sede ${code}` });
+      return res
+        .status(404)
+        .json({ msg: `Sin coincidencias para la Sede ${code}` });
     }
   } catch (error) {
     return res.status(400).json({ error });
   }
 };
 
-export const getCampusId  = async (req, res) => {
+export const getCampusId = async (req, res) => {
   try {
     const { id } = req.params;
     const campus = await Campus.findById(id);
-    if(campus){
-return res.json(campus);
-    }else{
-return res.status(404).json({msg:`Sin coincidencias para la busqueda realizada`})
+    if (campus) {
+      return res.json(campus);
+    } else {
+      return res
+        .status(404)
+        .json({ msg: `Sin coincidencias para la busqueda realizada` });
     }
   } catch (error) {
     return res.status(400).json({ error });
@@ -61,12 +63,12 @@ return res.status(404).json({msg:`Sin coincidencias para la busqueda realizada`}
 export const putCampus = async (req, res) => {
   try {
     const { id } = req.params;
-    const searchCode = await Campus.findOne({code:req.body.code})
+    const searchCode = await Campus.findOne({ code: req.body.code });
     if (searchCode && searchCode._id.toString() !== id) {
       return res
         .status(404)
         .json({ msg: "Ya se encuentra una Sede registrada con ese codigo" });
-    };
+    }
     const updatedCampus = await Campus.findByIdAndUpdate(
       { _id: id },
       { $set: req.body },

@@ -5,8 +5,8 @@ const campusSchema = new mongoose.Schema(
     code: {type:String, required:true},
     name: { type:String, required:true},
     address: {type:String, required:true},
-    status: {type:Boolean, required:true},
-    city: {type:mongoose.Schema.Types.ObjectId, ref:'City', required:true},
+    status: { type: Boolean, required: true, default: true },
+    city: {type:String, required:true},
     createdAt : {type: Date, default: Date.now}
   },
   {collection: 'Campus'} 
